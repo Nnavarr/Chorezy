@@ -1,46 +1,39 @@
-import decode from 'jwt-decode';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Auth from '../../utils/auth';
 
-class AuthService {
-  getProfile() {
-    return decode(this.getToken());
-  }
+const Header = () => {
+  const logout = event => {
+    event.preventDefault();
+    Auth.logout();
+  };
 
-  loggedIn() {
-    // Checks if there is a saved token and it's still valid
-    const token = this.getToken();
-    return !!token && !this.isTokenExpired(token); // handwaiving here
-  }
+  return (
+    <header className="bg-secondary mb-4 py-2 flex-row align-center">
+      <div className="container flex-row justify-space-between-lg justify-center align-center">
+        <Link to="/">
+          <h1>Deep Thoughts</h1>
+        </Link>
+        
+        <nav className="text-center">
+          {Auth.loggedIn() ? (
+            <>
+              <Link to="/profile">Me</Link>
+              <a href="/" onClick={logout}>
+                Logout
+              </a>
+            </>
+          ) : (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Signup</Link>
+            </>
+          )}
+        </nav>
 
-  isTokenExpired(token) {
-    try {
-      const decoded = decode(token);
-      if (decoded.exp < Date.now() / 1000) {
-        return true;
-      } else return false;
-    } catch (err) {
-      return false;
-    }
-  }
+      </div>
+    </header>
+  );
+};
 
-  getToken() {
-    // Retrieves the user token from localStorage
-    return localStorage.getItem('id_token');
-  }
-
-  login(idToken) {
-    // Saves user token to localStorage
-    localStorage.setItem('id_token', idToken);
-
-    window.location.assign('/');
-  }
-
-  logout() {
-    // Clear user token and profile data from localStorage
-    // axios.defaults.headers.common["Authorization"] = null;
-    localStorage.removeItem('id_token');
-    // this will reload the page and reset the state of the application
-    window.location.assign('/');
-  }
-}
-
-export default new AuthService();
+export default Header;
