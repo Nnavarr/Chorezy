@@ -11,8 +11,10 @@ import { setContext } from '@apollo/client/link/context';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
+
 import Home from './pages/Home';
 import Login from './pages/Login';
+import NoMatch from './pages/NoMatch';
 import SingleTask from './pages/SingleTask';
 import Adminprofile from './pages/Adminprofile';
 import Signup from './pages/Signup';
@@ -40,6 +42,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+
         <div className="flex-column justify-flex-start min-100-vh">
           <Header />
           <div className="container">
@@ -48,7 +51,7 @@ function App() {
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/Adminprofile/:username?" component={Adminprofile} />
-              <Route exact path="/thought/:id" component={SingleTask} />
+              <Route exact path="/SingleTask/:id" component={SingleTask} />
 
               <Route component={NoMatch} />
             </Switch>
