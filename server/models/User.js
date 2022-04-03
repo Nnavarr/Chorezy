@@ -21,13 +21,16 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
+    // age to be used in filtering assignable tasks
+    age : {
+      type: Number,
+      required: true
+    },
     // categiry for whether the user is an admin (parent) or user (child)
-    type: [
-      {
+    type: {
         type: String,
         required: true
-      }
-    ],
+    },
     // self reference for child users associated with an admin (if applicable)
     child: [
       {
