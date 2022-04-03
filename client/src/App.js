@@ -10,6 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -40,6 +41,20 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        
+      <nav className="navbar">
+        <div className="navbar-brand">
+          <a
+            className="navbar-item"
+            rel="noreferrer"
+            target="_blank"
+            href="https://github.com/mukukuu"
+          >
+            <span className="content is-large">GitHub </span>
+          </a>
+        </div>
+      </nav>
+
         <div className="flex-column justify-flex-start min-100-vh">
           <Header />
           <div className="container">
