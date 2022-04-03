@@ -15,8 +15,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import NoMatch from './pages/NoMatch';
-import SingleTask from './pages/SingleTask';
-import Adminprofile from './pages/Adminprofile';
+// import SingleTask from './pages/SingleTask';
+// import Adminprofile from './pages/Adminprofile';
 import Signup from './pages/Signup';
 
 const httpLink = createHttpLink({
@@ -50,8 +50,8 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
-              <Route exact path="/Adminprofile/:username?" component={Adminprofile} />
-              <Route exact path="/SingleTask/:id" component={SingleTask} />
+              {/* <Route exact path="/Adminprofile/:username?" component={Adminprofile} />
+              <Route exact path="/SingleTask/:id" component={SingleTask} /> */}
 
               <Route component={NoMatch} />
             </Switch>
