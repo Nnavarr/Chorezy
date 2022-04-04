@@ -1,10 +1,10 @@
 :root {
   --primary: #497573;
-  --secondary: #99f7f2;
-  --tertiary: #b2c2c1;
+  --secondary: #545d93;
+  --tertiary: #93e0db;
   --quatrinary: #cadbda;
   --light: #e1f5f4;
-  --dark: #6c7575;
+  --dark: #f2f8b0;
   --error: rgb(228, 46, 1);
   --border-radius: 0.3rem;
   --spacing-one: calc(1rem * 0.25);
@@ -16,14 +16,17 @@
 
 * {
   box-sizing: border-box;
+  
 }
 
 html,
 body {
   min-height: 100%;
+  
 }
 
 body {
+  text-align: center;
   margin: 0;
   padding: 0;
   font-family: 'Inconsolata', monospace;
@@ -31,7 +34,7 @@ body {
   line-height: 1.5;
   font-size: 20px;
   color: var(--dark);
-  background-color: #f3fffee1;
+  background-color: #171a1be1;
 }
 
 h1,
@@ -85,11 +88,13 @@ a:visited {
 }
 
 nav {
+  border-radius: 17px;
   width: 100%;
   justify-content: center;
 }
 
 nav a {
+  border-radius: 17px;
   padding: 6px 10px;
   margin: 0 15px;
   transition: all 0.2s;
@@ -133,6 +138,7 @@ nav a:hover {
 
 /* CARDS */
 .card {
+  border-radius: 17px;
   margin: 0 0 20px 0;
   border: 3px solid var(--dark);
   border-radius: var(--border-radius);
