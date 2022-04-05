@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 // const brcrypt = require('brcrypt');
 
 // TODO: Add password encryption
