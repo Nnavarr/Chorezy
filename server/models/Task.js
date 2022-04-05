@@ -25,7 +25,9 @@ const taskSchema = new Schema(
     }
   },
   {
-    toJson: {}
+    toJson: {
+      virtuals: true
+    }
   }
 )
 

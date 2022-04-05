@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose');
-const brcrypt = require('brcrypt');
+// const brcrypt = require('brcrypt');
 
 // TODO: Add password encryption
 const userSchema = new Schema(
@@ -41,11 +41,9 @@ const userSchema = new Schema(
   },
   {
     toJSON: {
-      virtuals: true
     }
   }
 );
 
 const User = model('User', userSchema);
-
 module.exports = User;
