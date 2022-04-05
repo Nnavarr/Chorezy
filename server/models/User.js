@@ -1,5 +1,5 @@
-const { Schema } = require('mongoose');
-const brcrypt = require('brcrypt');
+const { Schema, model } = require('mongoose');
+// const brcrypt = require('brcrypt');
 
 // TODO: Add password encryption
 const userSchema = new Schema(
@@ -27,12 +27,12 @@ const userSchema = new Schema(
       required: true
     },
     // categiry for whether the user is an admin (parent) or user (child)
-    type: {
+    admin: {
         type: Boolean,
         required: true
     },
     // self reference for child users associated with an admin (if applicable)
-    child: [
+    children: [
       {
         type: Schema.Types.ObjectId,
         ref: 'User'
@@ -41,11 +41,10 @@ const userSchema = new Schema(
   },
   {
     toJSON: {
-      virtuals: true
     }
   }
 );
 
 const User = model('User', userSchema);
-
 module.exports = User;
+
