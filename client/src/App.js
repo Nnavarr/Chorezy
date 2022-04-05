@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import {
   ApolloClient,
@@ -12,11 +13,11 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 
-import Home from './pages/Home';
+// import Home from './pages/Home';
 import Login from './pages/Login';
 import NoMatch from './pages/NoMatch';
-// import SingleTask from './pages/SingleTask';
-// import Adminprofile from './pages/Adminprofile';
+import SingleTask from './pages/SingleTask';
+import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 
 const httpLink = createHttpLink({
@@ -47,11 +48,11 @@ function App() {
           <Header />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={Home} />
+             {/* <Route exact path="/" component={Home} /> */}
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
-              {/* <Route exact path="/Adminprofile/:username?" component={Adminprofile} />
-              <Route exact path="/SingleTask/:id" component={SingleTask} /> */}
+              <Route exact path="/profile/:username?" component={Profile} />
+              <Route exact path="/SingleTask/:id" component={SingleTask} />
 
               <Route component={NoMatch} />
             </Switch>

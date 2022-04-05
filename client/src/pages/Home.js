@@ -1,68 +1,54 @@
 import React from 'react';
-import { makeStyles } from "@material-ui/core/styles"
-import { Container, Link, SvgIcon, Typography } from '@material-ui/core';
+import TaskList from '../components/TaskList';
+import TaskForm from '../components/TaskForm';
+import AwardList from '../components/AwardList';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        margin: theme.spacing(6, 0, 3),
-    },
-    lightBulb: {
-        verticalAlign: 'middle',
-        marginRight: theme.spacing(1),
-    },
-}));
+import Auth from '../utils/auth';
+import { useQuery } from '@apollo/client';
+import { QUERY_TASKS, QUERY_ME_BASIC } from '../utils/queries';
 
-const Home = (props) => {
-    const classes = useStyles();
+const Home = () => {
+  const { loading, data } = useQuery(QUERY_TASKS);
+  const { data: userData } = useQuery(QUERY_ME_BASIC);
+  const tasks = data?.tasks || [];
 
-    function LightBulbIcon(props) {
-        return (
-            <SvgIcon {...props}>
-                <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z" />
-            </SvgIcon>
-        );
-    }
+  const loggedIn = Auth.loggedIn();
 
-    function ProTip() {
-        return (
-            <Typography className={classes.root} color="textSecondary">
-                <LightBulbIcon className={classes.lightBulb} />
-                Pro tip: See more{' '}
-                <Link href="https://mui.com/getting-started/templates/">
-                    templates
-                </Link>{' '}
-                on the Material-UI documentation.
-            </Typography>
-        );
-    }
+  return (
+    <main>
+        
+      <div className="flex-row justify-space-between">
+        {loggedIn && (
+          <div className="col-12 mb-3">
+            <TaskForm />
+          </div>
+        )}
 
-    function Copyright() {
-        return (
-            <Typography variant="body2" color="textSecondary" align="center">
-                {'Copyright © '}
-                <Link color="inherit" href="https://mui.com/">
-                    Your Website
-                </Link>{' '}
-                {new Date().getFullYear()}
-                {'.'}
-            </Typography>
-        );
-    }
+        <div className={`col-12 mb-3 ${loggedIn && 'col-lg-8'}`}>
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <TaskList
+              tasks={tasks}
+              title="Some Feed for Task(s)..."
+            />
+          )}
+        </div>
 
-    return (
-        <Container maxWidth="sm">
-            <div style={{ marginTop: 24, }}>
-                <Typography variant="h4" component="h1" gutterBottom>
-                    CDN v4-beta example
-                </Typography>
-                <ProTip />
-                <Copyright />
-            </div>
-        </Container>
-    );
+        {loggedIn && userData ? (
+          <div className="col-12 col-lg-3 mb-3">
+            <AwardList
+              username={userData.me.username}
+              awardCount={userData.me.awardCount}
+              awards={userData.me.awards}
+            /> 
+          </div>
+        ) : null}
+        
+      </div>
 
-}
+    </main>
+  );
+};
 
 export default Home;
-
-
