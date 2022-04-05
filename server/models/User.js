@@ -28,7 +28,7 @@ const userSchema = new Schema(
     },
     // categiry for whether the user is an admin (parent) or user (child)
     type: {
-        type: String,
+        type: Boolean,
         required: true
     },
     // self reference for child users associated with an admin (if applicable)
