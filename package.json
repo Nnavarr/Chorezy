@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/mukukuu/deep-thoughts#readme",
   "devDependencies": {
-    "concurrently": "^7.0.0"
+  },
+  "dependencies": {
+   
   }
 }
