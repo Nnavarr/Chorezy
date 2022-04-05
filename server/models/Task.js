@@ -18,6 +18,10 @@ const taskSchema = new Schema(
     min_age: {
       type: Number,
       required: true
+    },
+    value: {
+      type: Number,
+      required: true
     }
   },
   {
