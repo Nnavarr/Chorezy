@@ -21,6 +21,7 @@ const typeDefs = gql`
     username: String
     email: String
     age: Int!
+    parent: [User]
   }
 
   type Query {
