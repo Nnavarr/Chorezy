@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Image from './src/assets/images/chores-image.jpg';
+
 const AdminProfile = () => {
  
     return (
