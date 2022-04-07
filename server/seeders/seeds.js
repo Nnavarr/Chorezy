@@ -17,7 +17,12 @@ db.once('open', async() => {
     const email = faker.internet.email(username);
     const password = faker.internet.password();
     const age = faker.random.number({max: 100});
-    const admin = true;
+    let admin = true
+
+    // if i is divisible by 2, set to admin to false (child)
+    if (i % 2 == 0){
+      admin = false
+    }
     const children = [];
     const tasks = [];
 
@@ -28,26 +33,17 @@ db.once('open', async() => {
   // insert users to model
   await User.collection.insertMany(userData);
 
-  // create children
-  for (let i = 0; i < 10; i += 1) {
-    // randomly select user to have children added (User)
-    const randomUserIndex = Math.floor(Math.random() * userData.length);
-    const { _id: userId } = userData[randomUserIndex];
+  // pull all children 
+  childUsers = await User.find({ admin: false });
+  parentUsers = await User.find({ admin: true })
 
-    // convert userId to childId
-    let childId = userId; 
-
-    // catch for matching userId and childId (try another random number)
-    while (childId === userId) {
-      const randomUserIndex = Math.floor(Math.random() * userData.length);
-      childId = userData[randomUserIndex]
-    }
-
-    // append child to User & update admin to false
-    await User.updateOne({ _id: userId }, {$addToSet: { children: childId }});
-    await User.updateOne({ _id: userId }, {admin: false});
+  for (child in childUsers) {
+    // append children to random 
+    const randomUserIndex = Math.floor(Math.random() * parentUsers.length);
+    const { _id: userId } = parentUsers[randomUserIndex];
+    await User.updateOne({ _id: userId }, { $addToSet: { children: childUsers[child]._id}})
   }
-  
+
   process.exit(0);
 })
 
