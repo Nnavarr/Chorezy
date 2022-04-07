@@ -6,19 +6,38 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     // TODO: Add authentication
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id })
+          .select('-__v -password')
+          .populate('children')
+          .populate('tasks');
+    
+        return userData;
+      }
+    
+      throw new AuthenticationError('Not logged in');
+    },
 
     // find all users
     users: async () => {
       return User.find()
         .select('-__v -password')
         .populate('children')
+        .populate('tasks')
     },
 
     // child query
     children: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Child.find(params)
-    }
+    },
+      // get a child by username
+      children: async (parent, { username }) => {
+        return User.findOne({ username })
+          .select("-__v -password")
+          .populate("tasks")
+      },
 
   },
   Mutation: {
