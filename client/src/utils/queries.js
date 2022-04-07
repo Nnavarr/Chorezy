@@ -88,3 +88,20 @@ export const QUERY_TASK = gql`
   }
 `;
 
+export const QUERY_CHILD = gql`
+  query user($username: String!) {
+    user(username: $username) {
+      _id
+      username
+      email
+      age
+      task {
+        _id
+        taskText
+        createdAt
+        reactionCount
+      }
+    }
+  }
+`;
+
