@@ -76,6 +76,7 @@ h6 {
 p {
   font-size: 1.1rem;
   margin-top: 0;
+  color: var(--secondary);
 }
 
 a {
@@ -144,6 +145,7 @@ nav a:hover {
   border-radius: var(--border-radius);
   background-color: var(--light);
   color: var(--dark);
+  margin-bottom: 5%;
 }
 
 .card-header {
@@ -154,9 +156,16 @@ nav a:hover {
   border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
 }
 
-.card-body {
+.card-body  {
   padding: 2.5%;
   font-size: 1.4rem;
+  color: var(--secondary);
+  list-style: none;
+}
+.ul{
+  list-style: none;
+  width: 25%;
+  color: var(--secondary);
 }
 
 /* FORM */

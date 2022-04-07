@@ -13,7 +13,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 
-// import Home from './pages/Home';
+import Home from './pages/Home';
 import Login from './pages/Login';
 import NoMatch from './pages/NoMatch';
 import SingleTask from './pages/SingleTask';
@@ -48,7 +48,7 @@ function App() {
           <Header />
           <div className="container">
             <Switch>
-             {/* <Route exact path="/" component={Home} /> */}
+            <Route exact path="/" component={Home} /> 
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/profile/:username?" component={Profile} />
