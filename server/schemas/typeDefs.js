@@ -13,20 +13,22 @@ const typeDefs = gql`
     username: String
     email: String
     age: Int!
-    children: [Child]
+    admin: Boolean
+    children: [User]
+    tasks: [Task]
   }
 
-  type Child {
+  type Task {
     _id: ID!
-    username: String
-    email: String
-    age: Int!
-    parent: [User]
+    name: String
+    category: String
+    min_age: Int!
+    value: Int!
   }
 
   type Query {
+    me: User
     users: [User]
-    children: [Child]
     user(username: String!): User
   }
 
