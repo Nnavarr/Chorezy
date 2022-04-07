@@ -23,7 +23,7 @@ const taskSchema = new Schema(
       type: Number,
       required: true
     },
-    task: {
+    completed: {
       type: Boolean,
       required: true
     } 

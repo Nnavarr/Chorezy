@@ -27,17 +27,6 @@ const resolvers = {
         .populate('tasks')
     },
 
-    // child query
-    children: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Child.find(params)
-    },
-      // get a child by username
-      children: async (parent, { username }) => {
-        return User.findOne({ username })
-          .select("-__v -password")
-          .populate("tasks")
-      },
 
   },
   Mutation: {
