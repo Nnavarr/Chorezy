@@ -26,11 +26,23 @@ const userSchema = new Schema(
       type: Number,
       required: true
     },
+    // tag to differentiate admin from child
+    admin: {
+      type: Boolean,
+      required: true
+    },
     // reference for child schema
     children: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Child'
+        ref: 'User'
+      }
+    ],
+    // tasks assigned to the user
+    tasks: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Task'
       }
     ]
   },
