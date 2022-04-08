@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-// const brcrypt = require('brcrypt');
+const bcrypt = require('bcrypt');
 
 // TODO: Add password encryption
 const userSchema = new Schema(
@@ -50,6 +50,20 @@ const userSchema = new Schema(
     toJSON: {}
   }
 );
+
+// set presave middleware to ocreate password
+userSchema.pre('save', async function(next) {
+  if (this.isNew || this.isModified('password')) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
+  next();
+})
+
+// compare incoming password with the hashed pw
+userSchema.methods.isCorrectPassword = async function(password) {
+  return bcrypt.compare(password, this.password);
+}
 
 const User = model('User', userSchema);
 module.exports = User;
