@@ -25,6 +25,12 @@ const resolvers = {
         .select('-__v -password')
         .populate('children')
         .populate('tasks')
+    },
+
+    // tasks
+    tasks: async () => {
+      return Task.find()
+        .select('-__v')
     }
   },
 
@@ -76,10 +82,16 @@ const resolvers = {
 
           return updatedUser
         }
+      },
+
+      // task related resolvers
+      addTask: async (parent, args, context) => {
+        if (context.user) {
+          const task = await Task.create(args);
+          return task;
+        }
       }
-
-
-}
+  }
 };
 
 module.exports = resolvers;
