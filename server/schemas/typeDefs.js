@@ -34,6 +34,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(username: String!, age: Int!, email: String!, password: String!, admin: Boolean!): Auth
     addChild(childId: ID!): User 
+    removeChild(childId: ID!): User
   }
 `
 
