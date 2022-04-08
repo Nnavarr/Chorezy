@@ -1,40 +1,61 @@
-import React from "react";
-import { Link } from "react-router-dom";
 
-const TaskList = ({ tasks, title }) => {
-  if (!tasks.length) {
-    return <h3>🎉 No Chores Left! 🎉</h3>;
-  }
+// import React from "react";
 
-  return (
-    <div>
-      <h3>{title}</h3>
-      {tasks &&
-        tasks.map((task) => (
-          <div key={task._id} className="card mb-3">
-            <p className="card-header">
-              <Link
-                to={`/profile/${task.username}`}
-                style={{ fontWeight: 700 }}
-                className="text-light"
-              >
-                {task.username}
-              </Link>{" "}
-              task on {task.createdAt}
-            </p>
-            <div className="card-body">
-              <Link to={`/task/${task._id}`}>
-                <p>{task.taskText}</p>
-                <p className="mb-0">
-                  Reactions: {task.reactionCount} || Click to{" "}
-                  {task.reactionCount ? "see" : "start"} the discussion!
-                </p>
-              </Link>
-            </div>
-          </div>
-        ))}
-    </div>
-  );
-};
+// function TaskList(props) {
+//   return (
+//     <div>
+//       <div className="columns is-desktop is-justify-content-center is-flex-wrap-wrap is-flex-direction-row">
+//         {props.tasks.map((task) => (
+//           <div className="column is-half">
+//             <div className="card">
 
-export default TaskList;
+//               <div className="card-image">
+//                 <figure className="image is-4by3">
+//                   <a href={task.live} target="_blank" rel="noreferrer">
+//                     <img src={process.env.PUBLIC_URL + task.image} alt="Placeholder image" />
+//                   </a>
+//                 </figure>
+//               </div>
+
+//               <div className="card-content">
+
+//                 <div className="media">
+//                   <div className="media-left"></div>
+//                   <div className="media-content">
+//                     <p className="title is-4" key={task.id}>
+//                       {task.title}
+//                     </p>
+//                   </div>
+//                 </div>
+
+//                 <div className="content has-text-left">
+//                   {task.description}
+//                   <br />
+//                   <br />
+
+//                   <div className="card">
+					  
+//                     <footer className="card-footer">
+//                       <a
+//                         href={task.repo}
+//                         className="card-footer-item"
+//                         target="_blank" rel="noreferrer"
+//                       >
+//                         good job
+//                       </a>
+//                       <br />
+//                     </footer>
+//                   </div>
+
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default TaskList;
+
