@@ -1,6 +1,6 @@
 :root {
-  --primary: #497573;
-  --secondary: #545d93;
+  --primary: #232dec;
+  --secondary: #3eb9db;
   --tertiary: #93e0db;
   --quatrinary: #cadbda;
   --light: #e1f5f4;
@@ -34,7 +34,7 @@ body {
   line-height: 1.5;
   font-size: 20px;
   color: var(--dark);
-  background-color: #171a1be1;
+  background-color: orange;
 }
 
 h1,
