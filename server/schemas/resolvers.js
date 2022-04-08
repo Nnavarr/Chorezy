@@ -51,6 +51,34 @@ const resolvers = {
         const token = signToken(user);
         return { token, user };
       },
+
+      addChild: async (parent, { childId }, context) => {
+        if (context.user) {
+          const updatedUser = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: { children: childId } },
+            { new: true }
+          ).populate('children');
+      
+          return updatedUser;
+        }
+      
+        throw new AuthenticationError('You need to be logged in!');
+      },
+
+      removeChild: async (parent, { childId }, context) => {
+        if (context.user){
+          const updatedUser = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $pull: { children: childId } },
+            { new: true }
+          ).populate('children');
+
+          return updatedUser
+        }
+      }
+
+
 }
 };
 
