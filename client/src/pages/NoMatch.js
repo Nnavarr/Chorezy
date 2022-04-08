@@ -1,8 +1,9 @@
 import React from 'react';
 
 const NoMatch = () => {
+
   return (
-    <div>
+    <div style={{fontWeight: 'bold', color: 'darkgreen'}}>
       Oops, we couldn't find that page.
     </div>
   );
