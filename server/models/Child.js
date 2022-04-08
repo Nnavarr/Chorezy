@@ -1,12 +1,11 @@
 const { Schema, model } = require('mongoose');
-// const brcrypt = require('brcrypt');
 
 // TODO: Add password encryption
-const userSchema = new Schema(
+const childSchema = new Schema(
   {
     username: {
       type: String,
-      required: true,
+      requried: true,
       unique: true,
       trim: true
     },
@@ -21,16 +20,16 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    // age to be used in filtering assignable tasks
-    age : {
+    age: {
       type: Number,
       required: true
     },
-    // reference for child schema
-    children: [
+    // reference to parent user
+    parent: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Child'
+        ref: 'User',
+        required: true
       }
     ]
   },
@@ -39,6 +38,5 @@ const userSchema = new Schema(
   }
 );
 
-const User = model('User', userSchema);
-module.exports = User;
-
+const Child = model('Child', childSchema);
+module.exports = Child;

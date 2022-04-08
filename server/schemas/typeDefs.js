@@ -13,13 +13,31 @@ const typeDefs = gql`
     username: String
     email: String
     age: Int!
-    type: String
+    children: [Child]
+  }
+
+  type Child {
+    _id: ID!
+    username: String
+    email: String
+    age: Int!
+    parent: [User]
   }
 
   type Query {
-    me: User
     users: [User]
+    children: [Child]
     user(username: String!): User
+  }
+
+  type Auth {
+    token: ID!
+    user: User
+  }
+
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
   }
 `
 
