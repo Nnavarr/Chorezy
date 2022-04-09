@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_TASK } from "../../utils/mutations";
-import { QUERY_TASKS, QUERY_CHILD, QUERY_ME } from '../../utils/queries';
+import { QUERY_TASKS, QUERY_USER, QUERY_ME } from '../../utils/queries';
 
 const TaskForm = () => {
   const [taskText, setText] = useState("");
@@ -20,10 +20,10 @@ const TaskForm = () => {
       }
   
       // update me object's cache, appending new task to the end of the array
-      const { child } = cache.readQuery({ query: QUERY_CHILD });
+      const { user } = cache.readQuery({ query: QUERY_USER });
       cache.writeQuery({
-        query: QUERY_CHILD,
-        data: { child: { ...child, tasks: [...child.tasks, addTask] } }
+        query: QUERY_USER,
+        data: { user: { ...user, tasks: [...user.tasks, addTask] } }
       });
     }
   });
