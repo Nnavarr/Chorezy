@@ -36,7 +36,6 @@ const resolvers = {
   
   Mutation: {
     addUser: async (parent, {username, email, password, admin}) => {
-      console.log('addUser mutation...')
       const user = await User.create({ username, email, password, admin });
       const token = signToken(user);
 
@@ -90,6 +89,19 @@ const resolvers = {
         if (context.user) {
           const task = await Task.create(args);
           return task;
+        }
+      },
+
+      // remove task from list of tasks to be assigned
+      removeTask: async (parent, { taskId }, context) => {
+        if (context.user) {
+          const task = await Task.findOneAndUpdate(
+            { _id: context.user._id },
+            { $pull: { tasks: taskId } },
+            { new: true }
+          ).populate('tasks');
+          
+          return task
         }
       }
   }
