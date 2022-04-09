@@ -27,8 +27,13 @@ const resolvers = {
         .populate('tasks')
     },
 
-
+    // tasks
+    tasks: async () => {
+      return Task.find()
+        .select('-__v')
+    }
   },
+  
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
@@ -52,7 +57,41 @@ const resolvers = {
         const token = signToken(user);
         return { token, user };
       },
-}
+
+      addChild: async (parent, { childId }, context) => {
+        if (context.user) {
+          const updatedUser = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: { children: childId } },
+            { new: true }
+          ).populate('children');
+      
+          return updatedUser;
+        }
+      
+        throw new AuthenticationError('You need to be logged in!');
+      },
+
+      removeChild: async (parent, { childId }, context) => {
+        if (context.user){
+          const updatedUser = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $pull: { children: childId } },
+            { new: true }
+          ).populate('children');
+
+          return updatedUser
+        }
+      },
+
+      // task related resolvers
+      addTask: async (parent, args, context) => {
+        if (context.user) {
+          const task = await Task.create(args);
+          return task;
+        }
+      }
+  }
 };
 
 module.exports = resolvers;
