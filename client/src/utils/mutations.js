@@ -81,16 +81,11 @@ export const ADD_REACTION = gql`
   }
 `;
 
-export const ADD_FRIEND = gql`
-  mutation addFriend($id: ID!) {
-    addFriend(friendId: $id) {
+export const ADD_CHILD = gql`
+  mutation addChild($id: ID!) {
+    addChild(childId: $id) {
       _id
       username
-      friendCount
-      friends {
-        _id
-        username
-      }
     }
   }
 `;
