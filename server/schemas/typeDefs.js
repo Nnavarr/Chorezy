@@ -5,7 +5,6 @@ const typeDefs = gql`
     _id: ID!
     username: String
     email: String
-    age: Int!
     admin: Boolean
     children: [User]
     tasks: [Task]
@@ -33,10 +32,11 @@ const typeDefs = gql`
 
   type Mutation {
     login(email: String!, password: String!): Auth
-    addUser(username: String!, age: Int!, email: String!, password: String!, admin: Boolean!): Auth
+    addUser(username: String!, email: String!, password: String!, admin: Boolean): Auth
     addChild(childId: ID!): User 
     removeChild(childId: ID!): User
     addTask(name: String!, category: String!, min_age: Int!, value: Int!): Task
+    
   }
 `
 
