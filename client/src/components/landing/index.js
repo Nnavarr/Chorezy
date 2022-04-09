@@ -6,7 +6,7 @@ const Landing = () => {
       id="hero"
       className=""
     >
-      <ParticlesBg type="lines" num={450} bg={true} />
+      {/*<ParticlesBg type="lines" num={450} bg={true} />*/}
       <div className="container valign-wrapper jc-center">
         <div className="valign center-align white-text">
           <h2>
