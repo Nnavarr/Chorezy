@@ -21,15 +21,10 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    // age to be used in filtering assignable tasks
-    age : {
-      type: Number,
-      required: true
-    },
     // tag to differentiate admin from child
     admin: {
       type: Boolean,
-      required: true
+      required: false
     },
     // reference for child schema
     children: [
