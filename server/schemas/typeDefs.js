@@ -14,8 +14,9 @@ const typeDefs = gql`
     _id: ID!
     name: String
     category: String
-    min_age: Int!
     value: Int!
+    completed: Boolean
+    username: String!
   }
 
   type Query {
@@ -33,9 +34,14 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!, admin: Boolean): Auth
+    
     addChild(childId: ID!): User 
     removeChild(childId: ID!): User
-    addTask(name: String!, category: String!, min_age: Int!, value: Int!): Task
+
+    addTask(name: String!, category: String!, value: Int!): Task
+    removeTask(taskId: ID!): Task
+
+    assignTask(childId: ID!, taskId: ID!): User
     
   }
 `

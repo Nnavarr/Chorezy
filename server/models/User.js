@@ -33,7 +33,7 @@ const userSchema = new Schema(
         ref: 'User'
       }
     ],
-    // tasks assigned to the user
+    // tasks the user created, or assigned (if child)
     tasks: [
       {
         type: Schema.Types.ObjectId,
@@ -62,4 +62,3 @@ userSchema.methods.isCorrectPassword = async function(password) {
 
 const User = model('User', userSchema);
 module.exports = User;
-
