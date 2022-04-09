@@ -11,8 +11,8 @@ import { setContext } from '@apollo/client/link/context';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import coverImage from "./assets/images/chores-image.jpg";
-import { makeStyles } from '@material-ui/core/styles'
+import coverImage from "./assets/images/chores.jpg";
+import { makeStyles } from '@material-ui/core/styles';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -81,22 +81,21 @@ function App() {
           <Header />
           <div className={classes.imageContainer} style={imageBackground}>
             <div className={classes.overlay}></div>
-
             <div className={classes.mainContainer}>
-            <Switch>
-            <Route exact path="/" component={Home} /> 
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/profile/:username?" component={Profile} />
-              <Route exact path="/SingleTask/:id" component={SingleTask} />
-              <Route exact path="/Admin" component={AdminProfile} />
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/profile/:username?" component={Profile} />
+                <Route exact path="/SingleTask/:id" component={SingleTask} />
+                <Route exact path="/Admin" component={AdminProfile} />
 
-              <Route component={NoMatch} />
-            </Switch>
+                <Route component={NoMatch} />
+              </Switch>
             </div>
           </div>
-          <Footer />
         </div>
+        <Footer />
       </Router>
     </ApolloProvider>
   );
