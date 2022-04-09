@@ -35,8 +35,8 @@ const resolvers = {
   },
   
   Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
+    addUser: async (parent, {username, email, password, admin}) => {
+      const user = await User.create({ username, email, password, admin });
       const token = signToken(user);
 
       return { token, user };
@@ -82,13 +82,48 @@ const resolvers = {
 
           return updatedUser
         }
+
+        throw new AuthenticationError('You need to be logged in!');
       },
 
       // task related resolvers
       addTask: async (parent, args, context) => {
         if (context.user) {
-          const task = await Task.create(args);
-          return task;
+          // create a new Task in the Task model
+          const task = await Task.create({ ...args, username: context.user.username });
+          
+          // update the User model for user specific Tasks
+          await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $push: {tasks: task._id } },
+            { new: true }
+          );
+          return task
+        }
+
+        throw new AuthenticationError('You need to be logged in!');
+      },
+
+      // remove task from list of tasks to be assigned
+      removeTask: async (parent, { taskId }, context) => {
+        if (context.user) {
+          const task = await Task.findByIdAndDelete({ _id: taskId })
+          return task
+        } else {
+          throw new AuthenticationError('You need to be logged in!');
+        }
+      },
+
+      // assign an existing task to a specific user
+      assignTask: async (parent, { childId, taskId }, context) => {
+        if (context.user) {
+          const updatedUser = await User.findOneAndUpdate(
+            { _id: childId },
+            { $addToSet: { tasks: taskId, completed: false }},
+            { new: true }
+            // only need to populate tasks since it's a child user
+          ).populate('tasks')
+          return updatedUser
         }
       }
   }

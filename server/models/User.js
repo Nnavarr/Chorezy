@@ -21,15 +21,10 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    // age to be used in filtering assignable tasks
-    age : {
-      type: Number,
-      required: true
-    },
     // tag to differentiate admin from child
     admin: {
       type: Boolean,
-      required: true
+      required: false
     },
     // reference for child schema
     children: [
@@ -38,7 +33,7 @@ const userSchema = new Schema(
         ref: 'User'
       }
     ],
-    // tasks assigned to the user
+    // tasks the user created, or assigned (if child)
     tasks: [
       {
         type: Schema.Types.ObjectId,
@@ -67,4 +62,3 @@ userSchema.methods.isCorrectPassword = async function(password) {
 
 const User = model('User', userSchema);
 module.exports = User;
-
