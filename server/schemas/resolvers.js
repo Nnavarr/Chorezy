@@ -112,6 +112,19 @@ const resolvers = {
         } else {
           throw new AuthenticationError('You need to be logged in!');
         }
+      },
+
+      // assign an existing task to a specific user
+      assignTask: async (parent, { childId, taskId }, context) => {
+        if (context.user) {
+          const updatedUser = await User.findOneAndUpdate(
+            { _id: childId },
+            { $addToSet: { tasks: taskId, completed: false }},
+            { new: true }
+            // only need to populate tasks since it's a child user
+          ).populate('tasks')
+          return updatedUser
+        }
       }
   }
 };
