@@ -25,7 +25,7 @@ const Home = () => {
           <div className="col l10 center-align">
             <h1>Get your kids to work!</h1>
             <p>Assign a chore card for your kid.</p>
-           <img className="responsive-img" src="../img/sweeping.png" ></img>
+           <img className="home-img" src="../img/water.jpg" ></img> 
           </div>
           <div className="col l1"></div>
         </div>

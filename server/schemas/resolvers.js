@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 
-const { User, Task } = require('../models');
+const { User, Task, Child } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -25,12 +25,19 @@ const resolvers = {
         .select('-__v -password')
         .populate('children')
         .populate('tasks')
+    },
+
+    // tasks
+    tasks: async () => {
+      return Task.find()
+        .select('-__v')
     }
   },
-
+  
   Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
+    addUser: async (parent, {username, email, password, admin}) => {
+      console.log('addUser mutation...')
+      const user = await User.create({ username, email, password, admin });
       const token = signToken(user);
 
       return { token, user };
@@ -76,10 +83,16 @@ const resolvers = {
 
           return updatedUser
         }
+      },
+
+      // task related resolvers
+      addTask: async (parent, args, context) => {
+        if (context.user) {
+          const task = await Task.create(args);
+          return task;
+        }
       }
-
-
-}
+  }
 };
 
 module.exports = resolvers;

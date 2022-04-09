@@ -37,6 +37,11 @@ body {
   background-color: orange;
 }
 
+
+
+footer{
+  color: var(--dark);
+}
 h1,
 h2,
 h3,
@@ -139,7 +144,7 @@ nav a:hover {
 
 /* CARDS */
 .card {
-  border-radius: 17px;
+  
   margin: 0 0 20px 0;
   border: 3px solid var(--dark);
   border-radius: var(--border-radius);
@@ -149,9 +154,10 @@ nav a:hover {
 }
 
 .card-header {
-  color: var(--secondary);
+  border-radius: 17px;
+  color: var(--dark);
   margin: 0;
-  background-color: var(--dark);
+  background-color: var(--secondary);
   padding: 0.625rem;
   border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
 }
@@ -166,6 +172,14 @@ nav a:hover {
   list-style: none;
   width: 25%;
   color: var(--secondary);
+}
+img{
+  border-radius:15px;
+  margin-bottom: 4%;
+}
+
+.home-img {
+  width: 100%;
 }
 
 /* FORM */
