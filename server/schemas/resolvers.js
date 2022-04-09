@@ -82,26 +82,35 @@ const resolvers = {
 
           return updatedUser
         }
+
+        throw new AuthenticationError('You need to be logged in!');
       },
 
       // task related resolvers
       addTask: async (parent, args, context) => {
         if (context.user) {
-          const task = await Task.create(args);
-          return task;
+          // create a new Task in the Task model
+          const task = await Task.create({ ...args, username: context.user.username });
+          
+          // update the User model for user specific Tasks
+          await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $push: {tasks: task._id } },
+            { new: true }
+          );
+          return task
         }
+
+        throw new AuthenticationError('You need to be logged in!');
       },
 
       // remove task from list of tasks to be assigned
       removeTask: async (parent, { taskId }, context) => {
         if (context.user) {
-          const task = await Task.findOneAndUpdate(
-            { _id: context.user._id },
-            { $pull: { tasks: taskId } },
-            { new: true }
-          ).populate('tasks');
-          
+          const task = await Task.findByIdAndDelete({ _id: taskId })
           return task
+        } else {
+          throw new AuthenticationError('You need to be logged in!');
         }
       }
   }

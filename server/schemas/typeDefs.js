@@ -16,6 +16,7 @@ const typeDefs = gql`
     category: String
     value: Int!
     completed: Boolean
+    username: String!
   }
 
   type Query {
@@ -35,9 +36,10 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!, admin: Boolean): Auth
     addChild(childId: ID!): User 
     removeChild(childId: ID!): User
-    addTask(name: String!, category: String!, min_age: Int!, value: Int!): Task
-    removeTask(name: String, category: String!): Task
+    addTask(name: String!, category: String!, value: Int!): Task
+    removeTask(taskId: ID!): Task
   }
 `
+
 // export the typeDefs
 module.exports = typeDefs;

@@ -33,7 +33,7 @@ const userSchema = new Schema(
         ref: 'User'
       }
     ],
-    // tasks assigned to the user
+    // tasks the user created, or assigned (if child)
     tasks: [
       {
         type: Schema.Types.ObjectId,

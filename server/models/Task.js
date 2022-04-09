@@ -14,18 +14,18 @@ const taskSchema = new Schema(
       type: String,
       required: true
     },
-    // minimum age used for filtering available tasks
-    min_age: {
-      type: Number,
-      required: true
-    },
     value: {
       type: Number,
       required: true
     },
     completed: {
       type: Boolean
-    } 
+    },
+    // association for user who created the task
+    username: {
+      type: String,
+      required: true
+    }
   },
   {
     toJson: {
