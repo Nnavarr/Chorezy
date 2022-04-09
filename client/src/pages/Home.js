@@ -2,6 +2,7 @@ import React from 'react'
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { QUERY_TASKS, QUERY_ME_BASIC } from '../utils/queries';
+import mainImage from "../assets/images/sweeping.png";
 
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
               <p>Are you a family looking for ways to equally distribute chores throughout the household?
                 With Chorezy, you can easily assign tasks to family members and track if they have been completed.
               </p>
+              <img src={mainImage} style={{ width: '50%' }} alt="main Img"></img>
         </div>
       </section>
       </main>

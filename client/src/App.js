@@ -81,21 +81,21 @@ function App() {
           <Header />
           <div className={classes.imageContainer} style={imageBackground}>
             <div className={classes.overlay}></div>
-              <div className={classes.mainContainer}>
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route exact path="/login" component={Login} />
-                  <Route exact path="/signup" component={Signup} />
-                  <Route exact path="/profile/:username?" component={Profile} />
-                  <Route exact path="/SingleTask/:id" component={SingleTask} />
-                  <Route exact path="/Admin" component={AdminProfile} />
+            <div className={classes.mainContainer}>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/profile/:username?" component={Profile} />
+                <Route exact path="/SingleTask/:id" component={SingleTask} />
+                <Route exact path="/Admin" component={AdminProfile} />
 
-                  <Route component={NoMatch} />
-                </Switch>
-              </div>
+                <Route component={NoMatch} />
+              </Switch>
             </div>
           </div>
-          <Footer />
+        </div>
+        <Footer />
       </Router>
     </ApolloProvider>
   );
