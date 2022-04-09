@@ -1,33 +1,29 @@
 const { gql } = require('apollo-server-express');
 
-/*
-User Model
----------
-type: Admin or User
-      This column will be used to conditionally render content based on user type
-*/
-
 const typeDefs = gql`
   type User {
     _id: ID!
     username: String
     email: String
     age: Int!
-    children: [Child]
+    admin: Boolean
+    children: [User]
+    tasks: [Task]
   }
 
-  type Child {
+  type Task {
     _id: ID!
-    username: String
-    email: String
-    age: Int!
-    parent: [User]
+    name: String
+    category: String
+    min_age: Int!
+    value: Int!
   }
 
   type Query {
+    me: User
     users: [User]
-    children: [Child]
     user(username: String!): User
+    tasks: [Task]
   }
 
   type Auth {
@@ -37,7 +33,10 @@ const typeDefs = gql`
 
   type Mutation {
     login(email: String!, password: String!): Auth
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(username: String!, age: Int!, email: String!, password: String!, admin: Boolean!): Auth
+    addChild(childId: ID!): User 
+    removeChild(childId: ID!): User
+    addTask(name: String!, category: String!, min_age: Int!, value: Int!): Task
   }
 `
 

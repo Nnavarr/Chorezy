@@ -22,7 +22,11 @@ const taskSchema = new Schema(
     value: {
       type: Number,
       required: true
-    }
+    },
+    completed: {
+      type: Boolean,
+      required: true
+    } 
   },
   {
     toJson: {

@@ -9,15 +9,15 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-secondary mb-4 py-2 flex-row align-center">
-      <div className="container flex-row justify-space-between-lg justify-center align-center">
-        <Link to="/">
+    <header className="bg-secondary py-2 flex-row align-center">
+      <div className="flex-row justify-space-between-lg justify-center align-center" style={{width:'100%'}}>
+        <Link to="/" style={{padding: '15px'}}>
           <h1>Chorezy</h1>
         </Link>
 
 
         
-        <nav className="text-center">
+        <nav className="text-center" style={{fontWeight: 'bold'}}>
           {Auth.loggedIn() ? (
             <>
               <Link to="/profile">Me</Link>
