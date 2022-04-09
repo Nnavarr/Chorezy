@@ -1,5 +1,5 @@
 import React from 'react';
-import coverImage from "../../assets/images/chores-image.jpg";
+import coverImage from "../../assets/images/chores.jpg";
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({

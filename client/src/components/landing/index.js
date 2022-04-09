@@ -1,5 +1,4 @@
 import React from 'react';
-import sprintboard from '../img/sweeping.jpg';
 
 const Landing = () => {
   return (
