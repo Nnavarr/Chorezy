@@ -89,9 +89,10 @@ const Signup = () => {
               <button className="btn d-block w-100" type="submit">
                 Submit
               </button>
-            </form>
+           
 
-            {error && <div>Signup failed</div>}
+            {error && <div>Signup failed</div>} 
+            </form>
           </div>
 
         </div>
