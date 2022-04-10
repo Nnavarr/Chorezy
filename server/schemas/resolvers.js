@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 
-const { User, Task, Child } = require('../models');
+const { User, Task, Assignment } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -11,12 +11,22 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select('-__v -password')
           .populate('children')
-          .populate('tasks');
+          .populate('tasks')
+          .populate('assignments')
     
         return userData;
       }
     
       throw new AuthenticationError('Not logged in');
+    },
+
+    // find specific user
+    user: async (parent, { username }) => {
+      return User.findOne({ username })
+        .select('-__v -password')
+        .populate('children')
+        .populate('tasks')
+        .populate('assignments')
     },
 
     // find all users
@@ -25,11 +35,17 @@ const resolvers = {
         .select('-__v -password')
         .populate('children')
         .populate('tasks')
+        .populate('assignments')
     },
 
     // tasks
     tasks: async () => {
       return Task.find()
+        .select('-__v')
+    },
+
+    assignments: async () => {
+      return Assignment.find()
         .select('-__v')
     }
   },
@@ -122,28 +138,36 @@ const resolvers = {
         }
       },
 
-      // assign an existing task to a specific user
-      assignTask: async (parent, { childId, taskId }, context) => {
-        if (context.user) {
-          const updatedUser = await User.findOneAndUpdate(
-            { _id: childId},
-            { $addToSet: { tasks: taskId, completed: false }},
-            { new: true }
-            // only need to populate tasks since it's a child user
-          ).populate('tasks')
-          return updatedUser
-        }
+      // assign task
+      // the task information will need to be extracted prior to running the mutation
+      assignTask: async (parent, { username, taskId, taskValue }) => {
+      
+        // set completed to false and extract tasks value
+        let completed = false;
+
+        // add entry to master assignment model
+        const assignment = await Assignment.create( 
+          { username, taskId, taskValue, completed }
+          )
+
+        // update user's model
+        await User.findOneAndUpdate(
+          { username: username },
+          { $push: { assignments: assignment._id} },
+          { new: true }
+        )
+
+        return assignment
       },
 
-      // mark task as complete: Child specific functionality
-      completeTask: async(parent, { childId, taskId }, context) => {
-        const updateUser = await User.findOneAndUpdate(
-          { _id: childId },
-          // { $set: {completed: true} },
-          { new: true }
-        ).populate('tasks')
-        return updateUser
-        }
+      // remove assigned task
+      removeAssignedTask: async (parent, { assignmentId }) => {
+        const assignment = await Assignment.findByIdAndDelete({ _id: assignmentId })
+        return assignment
+      }
+
+      // set task to complete
+
   }
 };
 

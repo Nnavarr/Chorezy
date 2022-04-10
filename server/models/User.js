@@ -39,6 +39,13 @@ const userSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: 'Task'
       }
+    ],
+    // populate any assigned tasks
+    assignments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Assignment'
+      }
     ]
   },
   {

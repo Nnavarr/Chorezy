@@ -2,11 +2,12 @@ const faker = require('faker');
 
 // import connection and models
 const db = require('../config/connection');
-const { User, Task } = require('../models/index');
+const { User, Task, Assignment} = require('../models/index');
 
 db.once('open', async() => {
   await Task.deleteMany({});
   await User.deleteMany({});
+  await Assignment.deleteMany({})
 
   // create user data
   const userData = [];
@@ -16,7 +17,6 @@ db.once('open', async() => {
     const username = faker.internet.userName();
     const email = faker.internet.email(username);
     const password = faker.internet.password();
-    const age = faker.random.number({max: 100});
     let admin = true
 
     // if i is divisible by 2, set to admin to false (child)
@@ -27,7 +27,7 @@ db.once('open', async() => {
     const tasks = [];
 
     // append to userData
-    userData.push({ username, email, password, age, admin, children, tasks })
+    userData.push({ username, email, password, admin, children, tasks })
   } 
 
   // insert users to model
@@ -43,6 +43,55 @@ db.once('open', async() => {
     const { _id: userId } = parentUsers[randomUserIndex];
     await User.updateOne({ _id: userId }, { $addToSet: { children: childUsers[child]._id}})
   }
+
+  // create task data
+  const taskData = [];
+
+  for (let i = 0; i < 5; i += 1) {
+    const name = faker.name.title();
+    const category = faker.name.title();
+    const value = faker.random.number({max: 10});
+
+    // create random parent index (only parents can create new tasks)
+    const randomUserIndex = Math.floor(Math.random() * parentUsers.length);
+    const username = parentUsers[randomUserIndex].username;
+
+    // push to taskData
+    taskData.push({ name, category, value, username})
+  }
+
+  // insert to mongodb
+  await Task.collection.insertMany(taskData);
+
+  // create assignments
+  const assignmentData = [];
+
+  // query task data
+  tasksUploaded = await Task.find({})
+
+  for (let i = 0; i < 5; i += 1) {
+    // create random child index
+    const randomUserIndex = Math.floor(Math.random() * childUsers.length);
+    const username = childUsers[randomUserIndex].username;
+
+    // create random index for task
+    const randomTaskIndex = Math.floor(Math.random() * tasksUploaded.length);
+    const taskId = tasksUploaded[randomTaskIndex]._id;
+    let completed = false;
+
+    // task value
+    const taskValue = tasksUploaded[randomTaskIndex].value;
+
+    if (i % 2 == 0) {
+      completed = true;
+    }
+
+    // append to container
+    assignmentData.push({ username, taskId, taskValue, completed })
+  }
+
+  // insert to mongodb
+  await Assignment.collection.insertMany(assignmentData);
 
   process.exit(0);
 })
