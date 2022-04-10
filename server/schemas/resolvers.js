@@ -138,8 +138,8 @@ const resolvers = {
       // mark task as complete: Child specific functionality
       completeTask: async(parent, { childId, taskId }, context) => {
         const updateUser = await User.findOneAndUpdate(
-          { _id: childId },
-          // { $set: {completed: true} },
+          { 'task._id': taskId },
+          { $set: {'completed': 'true'} },
           { new: true }
         ).populate('tasks')
         return updateUser
