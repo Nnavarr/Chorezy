@@ -1,18 +1,17 @@
-// import React from 'react';
-// import sprintboard from '../img/sweeping.jpg';
+import React from 'react';
 
-// const Landing = () => {
-//   return (
-//     <section
-//       id="hero"
-//       className=""
-//     >
-//       <ParticlesBg type="lines" num={450} bg={true} />
-//       <div className="container valign-wrapper jc-center">
-//         <div className="valign center-align white-text">
-//           <h2>
-//             YOUR JAVASCRIPT LIBRARY
-//           </h2>
+const Landing = () => {
+  return (
+    <section
+      id="hero"
+      className=""
+    >
+      {/*<ParticlesBg type="lines" num={450} bg={true} />*/}
+      <div className="container valign-wrapper jc-center">
+        <div className="valign center-align white-text">
+          <h2>
+            YOUR JAVASCRIPT LIBRARY
+          </h2>
 
 //           <p className="big">
 //             We build your website using cutting edge frameworks
