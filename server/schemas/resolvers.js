@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 
-const { User, Task, Child, Assignment } = require('../models');
+const { User, Task, Assignment } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -11,12 +11,22 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select('-__v -password')
           .populate('children')
-          .populate('tasks');
+          .populate('tasks')
+          .populate('assignments')
     
         return userData;
       }
     
       throw new AuthenticationError('Not logged in');
+    },
+
+    // find specific user
+    user: async (parent, { username }) => {
+      return User.findOne({ username })
+        .select('-__v -password')
+        .populate('children')
+        .populate('tasks')
+        .populate('assignments')
     },
 
     // find all users
@@ -25,6 +35,7 @@ const resolvers = {
         .select('-__v -password')
         .populate('children')
         .populate('tasks')
+        .populate('assignments')
     },
 
     // tasks
@@ -134,9 +145,17 @@ const resolvers = {
         // set completed to false and extract tasks value
         let completed = false;
 
+        // add entry to master assignment model
         const assignment = await Assignment.create( 
           { username, taskId, taskValue, completed }
           )
+
+        // update user's model
+        await User.findOneAndUpdate(
+          { username: username },
+          { $push: { assignments: assignment._id} },
+          { new: true }
+        )
 
         return assignment
       },
@@ -146,6 +165,9 @@ const resolvers = {
         const assignment = await Assignment.findByIdAndDelete({ _id: assignmentId })
         return assignment
       }
+
+      // set task to complete
+
   }
 };
 

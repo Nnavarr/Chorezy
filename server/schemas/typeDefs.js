@@ -8,6 +8,7 @@ const typeDefs = gql`
     admin: Boolean
     children: [User]
     tasks: [Task]
+    assignments: [Assignment]
   }
 
   type Task {
