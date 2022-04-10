@@ -4,22 +4,22 @@ import { Redirect, useParams } from 'react-router-dom';
 import TaskForm from '../components/TaskForm';
 import TaskList from '../components/TaskList';
 import AwardList from '../components/AwardList';
-
+import ChildList from '../components/ChildList';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-import { ADD_AWARD } from '../utils/mutations';
+import { ADD_AWARD, ADD_CHILD } from '../utils/mutations';
 import Auth from '../utils/auth';
 
-const Profile = (props) => {
+const Profile = () => {
   const { username: userParam } = useParams();
 
   const [addAward] = useMutation(ADD_AWARD);
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam },
+    variables: { username: userParam, admin: userParam }, 
   });
 
   const user = data?.me || data?.user || {};
-
+  const [addChild] = useMutation(ADD_CHILD);
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Redirect to="/profile" />;
@@ -35,6 +35,18 @@ const Profile = (props) => {
         You need to be logged in to see this. Use the navigation links above to
         sign up or log in!
       </h4>
+    );
+  }
+
+  if (user.admin = false) {
+    return (
+      <div className="flex-row justify-space-between mb-3">
+      <div className="col-12 mb-3 col-lg-8">
+        <TaskList
+          tasks={user.tasks}
+          title={`${user.username}'s tasks...`}
+        />
+      </div></div>
     );
   }
 
@@ -64,9 +76,9 @@ const Profile = (props) => {
 
       <div className="flex-row justify-space-between mb-3">
         <div className="col-12 mb-3 col-lg-8">
-          <TaskList
-            tasks={user.tasks}
-            title={`${user.username}'s tasks...`}
+          <ChildList
+            children={user.children}
+            title={`${user.username}'s children`}
           />
         </div>
 
