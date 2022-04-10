@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 
-const { User, Task, Child } = require('../models');
+const { User, Task, Child, Assignment } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -30,6 +30,11 @@ const resolvers = {
     // tasks
     tasks: async () => {
       return Task.find()
+        .select('-__v')
+    },
+
+    assignments: async () => {
+      return Assignment.find()
         .select('-__v')
     }
   },
@@ -122,28 +127,25 @@ const resolvers = {
         }
       },
 
-      // assign an existing task to a specific user
-      assignTask: async (parent, { childId, taskId }, context) => {
-        if (context.user) {
-          const updatedUser = await User.findOneAndUpdate(
-            { _id: childId},
-            { $addToSet: { tasks: taskId, completed: false }},
-            { new: true }
-            // only need to populate tasks since it's a child user
-          ).populate('tasks')
-          return updatedUser
-        }
+      // assign task
+      // the task information will need to be extracted prior to running the mutation
+      assignTask: async (parent, { username, taskId, taskValue }) => {
+      
+        // set completed to false and extract tasks value
+        let completed = false;
+
+        const assignment = await Assignment.create( 
+          { username, taskId, taskValue, completed }
+          )
+
+        return assignment
       },
 
-      // mark task as complete: Child specific functionality
-      completeTask: async(parent, { childId, taskId }, context) => {
-        const updateUser = await User.findOneAndUpdate(
-          { 'task._id': taskId },
-          { $set: {'completed': 'true'} },
-          { new: true }
-        ).populate('tasks')
-        return updateUser
-        }
+      // remove assigned task
+      removeAssignedTask: async (parent, { assignmentId }) => {
+        const assignment = await Assignment.findByIdAndDelete({ _id: assignmentId })
+        return assignment
+      }
   }
 };
 

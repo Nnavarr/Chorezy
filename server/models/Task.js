@@ -18,9 +18,6 @@ const taskSchema = new Schema(
       type: Number,
       required: true
     },
-    completed: {
-      type: Boolean
-    },
     // association for user who created the task
     username: {
       type: String,

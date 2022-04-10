@@ -15,8 +15,15 @@ const typeDefs = gql`
     name: String
     category: String
     value: Int!
-    completed: Boolean
     username: String!
+  }
+
+  type Assignment {
+    _id: ID!
+    username: String
+    taskId: String
+    taskValue: Int
+    completed: Boolean
   }
 
   type Query {
@@ -24,6 +31,7 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     tasks: [Task]
+    assignments: [Assignment]
   }
 
   type Auth {
@@ -43,8 +51,8 @@ const typeDefs = gql`
     addTask(name: String!, category: String!, value: Int!): Task
     removeTask(taskId: ID!): Task
 
-    assignTask(childId: ID!, taskId: ID!): User
-    completeTask(childId: ID!, taskId: ID!): User
+    assignTask(username: String!, taskId: ID!, taskValue: Int!): Assignment
+    removeAssignedTask(assignmentId: ID!): Assignment
   }
 `
 
