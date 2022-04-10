@@ -42,6 +42,14 @@ const resolvers = {
       return { token, user };
     },
 
+    removeUser: async (parent, {username}, context) => {
+      if (context.user) {
+        const user = await User.findOneAndDelete( {username: username });
+        return user
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
     login: async (parent, { email, password }) => {
         const user = await User.findOne({ email });
       
@@ -118,14 +126,24 @@ const resolvers = {
       assignTask: async (parent, { childId, taskId }, context) => {
         if (context.user) {
           const updatedUser = await User.findOneAndUpdate(
-            { _id: childId },
+            { _id: childId},
             { $addToSet: { tasks: taskId, completed: false }},
             { new: true }
             // only need to populate tasks since it's a child user
           ).populate('tasks')
           return updatedUser
         }
-      }
+      },
+
+      // mark task as complete: Child specific functionality
+      completeTask: async(parent, { childId, taskId }, context) => {
+        const updateUser = await User.findOneAndUpdate(
+          { _id: childId },
+          // { $set: {completed: true} },
+          { new: true }
+        ).populate('tasks')
+        return updateUser
+        }
   }
 };
 
