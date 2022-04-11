@@ -20,7 +20,7 @@ const Profile = () => {
 
   const user = data?.me || data?.user || {};
   const [addChild] = useMutation(ADD_CHILD);
-  
+
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Redirect to="/profile" />;
@@ -38,6 +38,8 @@ const Profile = () => {
       </h4>
     );
   }
+
+  console.log(user)
 
   // if (user.admin = false) {
   //   return (
