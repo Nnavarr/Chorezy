@@ -54,6 +54,7 @@ const Profile = () => {
     )
   }
 
+  // TODO: update this handle click
   const handleClick = async () => {
     try {
       await addAward({
@@ -64,6 +65,9 @@ const Profile = () => {
     }
   };
 
+  // add child functionality
+
+
   // main return statement
   return (
     <div>
@@ -72,26 +76,20 @@ const Profile = () => {
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
       </div>
-      {/* Buttons for Main Functionality */}
-      <div>
-        <button className="btn ml-auto" onClick={handleClick}>
-          New
-        </button>
-        {/* <button className="btn ml-auto" onClick={handleClick}>
-          Assign
-        </button>
-        <button className="btn ml-auto" onClick={handleClick}>
-          Review
-        </button> */}
-      </div>
-
+  
       <div className="flex-row justify-space-between mb-3">
+        
         <div className="col-12 mb-3 col-lg-8">
+            {/* add child button */}
+          <button className="btn ml-auto modal" id='addChild' data-bs-toggle='modal' onClick={handleClick}>
+            Add Child
+          </button>
+
           <ChildList
             username={user.username}
             children={user.children}
-            title={`${user.username} children`}
           />
+
         </div>
 
         <div className="col-12 col-lg-3 mb-3">
