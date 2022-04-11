@@ -20,8 +20,10 @@ const Profile = () => {
 
   const user = data?.me || data?.user || {};
   const [addChild] = useMutation(ADD_CHILD);
-  
+
   // redirect to personal profile page if username is yours
+
+
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Redirect to="/profile" />;
   }
@@ -39,17 +41,20 @@ const Profile = () => {
     );
   }
 
-  // if (user.admin = false) {
-  //   return (
-  //     <div className="flex-row justify-space-between mb-3">
-  //     <div className="col-12 mb-3 col-lg-8">
-  //       <TaskList
-  //         tasks={user.tasks}
-  //         title={`${user.username}'s tasks...`}
-  //       />
-  //     </div></div>
-  //   );
+  // check whether the user is an admin or not
+  if  (!user.admin){
+    return (
+      <div className="flex-row justify-space-between mb-3">
+      <div className="col-12 mb-3 col-lg-8">
+        <TaskList
+          tasks={user.tasks}
+          title={`${user.username}'s tasks...`}
+        />
+      </div></div>
+    )
+  }
 
+  // TODO: update this handle click
   const handleClick = async () => {
     try {
       await addAward({
@@ -60,26 +65,31 @@ const Profile = () => {
     }
   };
 
+  // add child functionality
+
+
+  // main return statement
   return (
     <div>
       <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
-
-        {userParam && (
-          <button className="btn ml-auto" onClick={handleClick}>
-            Add task
-          </button>
-        )}
       </div>
-
+  
       <div className="flex-row justify-space-between mb-3">
+        
         <div className="col-12 mb-3 col-lg-8">
+            {/* add child button */}
+          <button className="btn ml-auto modal" id='addChild' data-bs-toggle='modal' onClick={handleClick}>
+            Add Child
+          </button>
+
           <ChildList
+            username={user.username}
             children={user.children}
-            title={`${user.username}'s children`}
           />
+
         </div>
 
         <div className="col-12 col-lg-3 mb-3">
