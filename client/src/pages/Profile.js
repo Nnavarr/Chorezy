@@ -22,6 +22,8 @@ const Profile = () => {
   const [addChild] = useMutation(ADD_CHILD);
 
   // redirect to personal profile page if username is yours
+
+
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Redirect to="/profile" />;
   }
@@ -39,18 +41,18 @@ const Profile = () => {
     );
   }
 
-  console.log(user)
-
-  // if (user.admin = false) {
-  //   return (
-  //     <div className="flex-row justify-space-between mb-3">
-  //     <div className="col-12 mb-3 col-lg-8">
-  //       <TaskList
-  //         tasks={user.tasks}
-  //         title={`${user.username}'s tasks...`}
-  //       />
-  //     </div></div>
-  //   );
+  // check whether the user is an admin or not
+  if  (!user.admin){
+    return (
+      <div className="flex-row justify-space-between mb-3">
+      <div className="col-12 mb-3 col-lg-8">
+        <TaskList
+          tasks={user.tasks}
+          title={`${user.username}'s tasks...`}
+        />
+      </div></div>
+    )
+  }
 
   const handleClick = async () => {
     try {
@@ -62,25 +64,33 @@ const Profile = () => {
     }
   };
 
+  // main return statement
   return (
     <div>
       <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
-
-        {userParam && (
-          <button className="btn ml-auto" onClick={handleClick}>
-            Add task
-          </button>
-        )}
+      </div>
+      {/* Buttons for Main Functionality */}
+      <div>
+        <button className="btn ml-auto" onClick={handleClick}>
+          New
+        </button>
+        {/* <button className="btn ml-auto" onClick={handleClick}>
+          Assign
+        </button>
+        <button className="btn ml-auto" onClick={handleClick}>
+          Review
+        </button> */}
       </div>
 
       <div className="flex-row justify-space-between mb-3">
         <div className="col-12 mb-3 col-lg-8">
           <ChildList
+            username={user.username}
             children={user.children}
-            title={`${user.username}'s children`}
+            title={`${user.username} children`}
           />
         </div>
 
