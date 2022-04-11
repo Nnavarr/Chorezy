@@ -1,7 +1,6 @@
 import React from 'react'
 import mainImage from "../assets/images/sweeping.png";
 
-
 const Home = () => {
 
   return (
