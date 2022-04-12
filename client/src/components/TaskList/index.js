@@ -16,7 +16,7 @@ const TaskList = ({ tasks, title }) => {
               <Link
                 to={`/profile/${task.username}`}
                 style={{ fontWeight: 700 }}
-                className="text-light"
+                className="text-secondary"
               >
                 {task.username}
               </Link>{" "}
