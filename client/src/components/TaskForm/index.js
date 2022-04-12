@@ -2,24 +2,12 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_TASK } from "../../utils/mutations";
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup'
 import { QUERY_TASKS, QUERY_USER } from '../../utils/queries';
 
 const TaskForm = () => {
   const [taskText, setText] = useState("");
   const [characterCount, setCharacterCount] = useState(0);
   const [addTask, { error }] = useMutation(ADD_TASK)
-
-  const extractInput = async () => {
-    // extract values from elements
-    let taskValue = document.getElementById('taskValue').value;
-    let taskCategory = document.getElementById('taskCategory').value;
-
-    // convert taskValue to int
-    taskValue = parseInt(taskValue);
-
-    return {taskValue, taskCategory}
-  }
 
   // const [addTask, { error }] = useMutation(ADD_TASK, {
   //   update(cache, { data: { addTask } }) {
@@ -53,17 +41,19 @@ const TaskForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-
     try {
-      let taskValue = document.getElementById('taskValue').value;
-      let taskCategory = document.getElementById('taskCategory').value;
+      // extract values from inputs
+      const taskEl = document.getElementById('taskValue')
+      const categoryEl = document.getElementById('taskCategory')
 
+      let taskValue = taskEl.value;
+      let taskCategory = categoryEl.value;
       taskValue = parseInt(taskValue);
 
-      // add task to database
-      await addTask({
-        variables: { name: taskText, category: taskCategory, value: taskValue },
-      });
+      // // add task to database
+      // await addTask({
+      //   variables: { name: taskText, category: taskCategory, value: taskValue },
+      // });
 
       // clear form value
       setText("");
@@ -72,6 +62,9 @@ const TaskForm = () => {
       console.error(e);
     }
   };
+
+
+  // assign task
 
   return (
     <div>
@@ -116,7 +109,8 @@ const TaskForm = () => {
     
         <button className="btn col-12 col-md-3" type="submit" onClick={handleFormSubmit}>
           Create
-        </button>
+        </button>        
+
     </div>
   );
 };
