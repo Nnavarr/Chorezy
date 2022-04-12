@@ -59,15 +59,15 @@ const Profile = () => {
   }
 
   // TODO: update this handle click
-  const handleClick = async () => {
-    try {
-      await addAward({
-        variables: { id: user._id },
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  // const handleClick = async () => {
+  //   try {
+  //     await addAward({
+  //       variables: { id: user._id },
+  //     });
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
 
   
 
