@@ -84,6 +84,7 @@ const resolvers = {
 
       addChild: async (parent, { childId }, context) => {
         if (context.user) {
+
           const updatedUser = await User.findOneAndUpdate(
             { _id: context.user._id },
             { $addToSet: { children: childId } },

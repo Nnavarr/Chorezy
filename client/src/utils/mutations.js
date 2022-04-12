@@ -81,8 +81,8 @@ export const ADD_REACTION = gql`
 `;
 
 export const ADD_CHILD = gql`
-  mutation addChild($id: ID!) {
-    addChild(childId: $id) {
+  mutation ($childId: ID!) {
+    addChild(childId: $childId) {
       _id
       username
     }
