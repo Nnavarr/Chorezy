@@ -1,0 +1,29 @@
+{
+    "version":"0.2.0",
+    "configurations": [
+        {
+            "command": "npm start",
+            "name": "Run Backend Server",
+            "request": "launch",
+            "type": "node-terminal",
+            "options":{
+                "cwd": "${workspaceFolder}/server"
+            }
+        },
+        {
+            "command": "npm run start",
+            "name": "Run UI",
+            "request": "launch",
+            "type": "node-terminal",
+            "cwd": "${workspaceFolder}/client",
+        },
+        {
+            "name": "Attach Chrome to Client",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "urlFilter": "http://localhost:3000/*",
+            "webRoot": "${workspaceFolder}/client"
+        }
+    ]
+}

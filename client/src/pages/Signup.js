@@ -7,10 +7,11 @@ import Auth from '../utils/auth';
 const Signup = () => {
   const [formState, setFormState] = useState({
     username: '',
-    age: '',
     email: '',
     password: '',
+    admin: true
   });
+
   const [addUser, { error }] = useMutation(ADD_USER);
 
   // update state based on form input changes
@@ -29,13 +30,17 @@ const Signup = () => {
 
     try {
       const { data } = await addUser({
-        variables: { ...formState },
+        variables: { ...formState }
       });
 
       Auth.login(data.addUser.token);
     } catch (e) {
+
       console.error(e);
     }
+
+    // reset form state
+
   };
 
   return (
@@ -59,17 +64,6 @@ const Signup = () => {
 
               <input
                 className="form-input"
-                placeholder="Your age"
-                name="age"
-                type="age"
-                id="age"
-                value={formState.age}
-                onChange={handleChange}
-              />
-
-
-              <input
-                className="form-input"
                 placeholder="Your email"
                 name="email"
                 type="email"
@@ -89,9 +83,10 @@ const Signup = () => {
               <button className="btn d-block w-100" type="submit">
                 Submit
               </button>
-            </form>
+           
 
-            {error && <div>Signup failed</div>}
+            {error && <div>Signup failed</div>} 
+            </form>
           </div>
 
         </div>

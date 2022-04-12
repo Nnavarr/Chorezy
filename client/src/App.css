@@ -1,6 +1,6 @@
 :root {
-  --primary: #497573;
-  --secondary: #545d93;
+  --primary: #232dec;
+  --secondary: #3eb9db;
   --tertiary: #93e0db;
   --quatrinary: #cadbda;
   --light: #e1f5f4;
@@ -34,9 +34,14 @@ body {
   line-height: 1.5;
   font-size: 20px;
   color: var(--dark);
-  background-color: #171a1be1;
+  background-color: orange;
 }
 
+
+
+footer{
+  color: var(--dark);
+}
 h1,
 h2,
 h3,
@@ -76,6 +81,7 @@ h6 {
 p {
   font-size: 1.1rem;
   margin-top: 0;
+  color: var(--secondary);
 }
 
 a {
@@ -138,25 +144,42 @@ nav a:hover {
 
 /* CARDS */
 .card {
-  border-radius: 17px;
+  
   margin: 0 0 20px 0;
   border: 3px solid var(--dark);
   border-radius: var(--border-radius);
   background-color: var(--light);
   color: var(--dark);
+  margin-bottom: 5%;
 }
 
 .card-header {
-  color: var(--secondary);
+  border-radius: 17px;
+  color: var(--dark);
   margin: 0;
-  background-color: var(--dark);
+  background-color: var(--secondary);
   padding: 0.625rem;
   border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
 }
 
-.card-body {
+.card-body  {
   padding: 2.5%;
   font-size: 1.4rem;
+  color: var(--secondary);
+  list-style: none;
+}
+.ul{
+  list-style: none;
+  width: 25%;
+  color: var(--secondary);
+}
+img{
+  border-radius:15px;
+  margin-bottom: 4%;
+}
+
+.home-img {
+  width: 100%;
 }
 
 /* FORM */

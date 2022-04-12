@@ -7,12 +7,21 @@ export const QUERY_USER = gql`
       _id
       username
       email
-      age
-      task {
+      admin
+      children {
         _id
-        taskText
-        createdAt
-        reactionCount
+      }
+      tasks {
+        _id
+        name
+        category
+        value
+      }
+      assignments {
+        _id
+        taskId
+        taskValue
+        completed
       }
     }
   }
@@ -23,19 +32,29 @@ export const QUERY_ME = gql`
     me {
       _id
       username
-      age
       email
-      task {
+      admin
+      children {
         _id
-        taskText
-        createdAt
-        reactionCount
-        reactions {
+        username
+        tasks {
           _id
-          createdAt
-          reactionBody
-          username
+          name
+          category
+          value
         }
+      }
+      tasks {
+        _id
+        name
+        category
+        value
+      }
+      assignments {
+        _id
+        taskId
+        taskValue
+        completed
       }
     }
   }
@@ -46,45 +65,36 @@ export const QUERY_ME_BASIC = gql`
     me {
       _id
       username
-      age
       email
     }
   }
 `;
 
+// query all tasks using specific Username
 export const QUERY_TASKS = gql`
-  query tasks($username: String) {
+  query ($username: String) {
     tasks(username: $username) {
       _id
-      taskText
-      createdAt
+      name
+      category
+      value
       username
-      reactionCount
-      reactions {
-        _id
-        createdAt
-        username
-        reactionBody
-      }
     }
   }
 `;
 
+// query single Task
 export const QUERY_TASK = gql`
-  query task($id: ID!) {
+  query ($id: ID!) {
     task(_id: $id) {
       _id
-      taskText
-      createdAt
+      name
+      category
+      value
       username
-      reactionCount
-      reactions {
-        _id
-        createdAt
-        username
-        reactionBody
-      }
     }
   }
 `;
+
+
 

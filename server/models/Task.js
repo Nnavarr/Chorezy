@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const taskSchema = new Schema(
   {
@@ -14,21 +14,22 @@ const taskSchema = new Schema(
       type: String,
       required: true
     },
-    // minimum age used for filtering available tasks
-    min_age: {
+    value: {
       type: Number,
       required: true
     },
-    value: {
-      type: Number,
+    // association for user who created the task
+    username: {
+      type: String,
       required: true
     }
   },
   {
-    toJson: {}
+    toJson: {
+      virtuals: true
+    }
   }
 )
 
 const Task = model('Task', taskSchema);
-
 module.exports = Task;

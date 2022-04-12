@@ -23,12 +23,15 @@ const Login = (props) => {
     event.preventDefault();
 
     try {
+      // user login
       const { data } = await login({
         variables: { ...formState },
       });
 
+      // authenticate login credentials 
       Auth.login(data.login.token);
     } catch (e) {
+      // error when logging in
       console.error(e);
     }
 

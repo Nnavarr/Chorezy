@@ -1,5 +1,5 @@
-const { Schema } = require('mongoose');
-const brcrypt = require('brcrypt');
+const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
 
 // TODO: Add password encryption
 const userSchema = new Schema(
@@ -21,31 +21,51 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    // age to be used in filtering assignable tasks
-    age : {
-      type: Number,
-      required: true
+    // tag to differentiate admin from child
+    admin: {
+      type: Boolean,
+      required: false
     },
-    // categiry for whether the user is an admin (parent) or user (child)
-    type: {
-        type: Boolean,
-        required: true
-    },
-    // self reference for child users associated with an admin (if applicable)
-    child: [
+    // reference for child schema
+    children: [
       {
         type: Schema.Types.ObjectId,
         ref: 'User'
       }
+    ],
+    // tasks the user created, or assigned (if child)
+    tasks: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Task'
+      }
+    ],
+    // populate any assigned tasks
+    assignments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Assignment'
+      }
     ]
   },
   {
-    toJSON: {
-      virtuals: true
-    }
+    toJSON: {}
   }
 );
 
-const User = model('User', userSchema);
+// set presave middleware to ocreate password
+userSchema.pre('save', async function(next) {
+  if (this.isNew || this.isModified('password')) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
+  next();
+})
 
+// compare incoming password with the hashed pw
+userSchema.methods.isCorrectPassword = async function(password) {
+  return bcrypt.compare(password, this.password);
+}
+
+const User = model('User', userSchema);
 module.exports = User;
