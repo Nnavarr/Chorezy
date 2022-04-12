@@ -34,7 +34,8 @@ const AddChildForm = () => {
         variables: { ...formState }
       });
 
-      await addChild({childId: childId})
+      await addChild({
+          variables: {childId: childId }})
 
       Auth.login(data.addUser.token);
     } catch (e) {
