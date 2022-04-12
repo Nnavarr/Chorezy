@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { ADD_TASK } from "../../utils/mutations";
 import Form from 'react-bootstrap/Form';
 import { QUERY_TASKS, QUERY_USER } from '../../utils/queries';
@@ -50,10 +50,10 @@ const TaskForm = () => {
       let taskCategory = categoryEl.value;
       taskValue = parseInt(taskValue);
 
-      // // add task to database
-      // await addTask({
-      //   variables: { name: taskText, category: taskCategory, value: taskValue },
-      // });
+      // add task to database
+      await addTask({
+        variables: { name: taskText, category: taskCategory, value: taskValue },
+      });
 
       // clear form value
       setText("");
@@ -62,9 +62,6 @@ const TaskForm = () => {
       console.error(e);
     }
   };
-
-
-  // assign task
 
   return (
     <div>
@@ -109,7 +106,7 @@ const TaskForm = () => {
     
         <button className="btn col-12 col-md-3" type="submit" onClick={handleFormSubmit}>
           Create
-        </button>        
+        </button>       
 
     </div>
   );
