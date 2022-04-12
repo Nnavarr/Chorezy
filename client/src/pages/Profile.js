@@ -69,13 +69,12 @@ const Profile = () => {
     }
   };
 
-  
 
   const addNewChild = async () => {
     try {
       // estbalish variables
-      let childUsername = 'new_child3';
-      let childEmail = 'childemail3@email.com';
+      let childUsername = 'new_child24';
+      let childEmail = 'childemail24@email.com';
       let childPassowrd = 'child123';
       let childAdmin = false;
 
@@ -84,15 +83,12 @@ const Profile = () => {
         variables: { username: childUsername, email: childEmail, password: childPassowrd, admin: childAdmin}
       })
 
-      // query child
-      const childUser = await data.userQuery({
-        variables: {username: childUsername}
-      })
+      let childId = data.addUser.user._id
     
-      console.log(childUser);
-
       // assign to parent user (that created the child)
-      await addChild({childId: childUser._id})
+      await addChild({
+        variables: {childId: childId}
+      })
 
     } catch (e) {
       console.log(e)
