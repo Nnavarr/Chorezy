@@ -43,7 +43,6 @@ mutation ($username: String!, $taskId: ID!, $taskValue: Int!) {
 }
 `
 
-
 export const ADD_AWARD = gql`
   mutation addAward($id: ID!) {
     addAward(awardId: $id) {
