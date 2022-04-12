@@ -32,6 +32,18 @@ mutation ($name: String!, $category: String!, $value: Int!) {
 }
 `;
 
+export const ASSIGN_TASK = gql`
+mutation ($username: String!, $taskId: ID!, $taskValue: Int!) {
+  assignTask(username: $username, taskId: $taskId, taskValue: $taskValue) {
+    username,
+    taskId
+    taskValue,
+    completed
+  }
+}
+`
+
+
 export const ADD_AWARD = gql`
   mutation addAward($id: ID!) {
     addAward(awardId: $id) {
