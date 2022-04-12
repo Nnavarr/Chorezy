@@ -24,18 +24,12 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_TASK = gql`
-  mutation addTask($taskText: String!) {
-    addTask(taskText: $taskText) {
-      _id
-      taskText
-      createdAt
-      username
-      reactionCount
-      reactions {
-        _id
-      }
-    }
+mutation ($name: String!, $category: String!, $value: Int!) {
+  addTask(name: $name, category: $category, value: $value) {
+    _id,
+    name
   }
+}
 `;
 
 export const ADD_AWARD = gql`
