@@ -34,6 +34,8 @@ const AddChildForm = () => {
         variables: { ...formState }
       });
 
+      let childId = data.addUser.user._id
+      
       await addChild({
           variables: {childId: childId }})
 
