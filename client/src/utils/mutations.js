@@ -65,7 +65,6 @@ export const REMOVE_AWARD = gql`
   }
 `;
 
-
 export const ADD_REACTION = gql`
   mutation addReaction($thoughtId: ID!, $reactionBody: String!) {
     addReaction(thoughtId: $thoughtId, reactionBody: $reactionBody) {
@@ -82,8 +81,8 @@ export const ADD_REACTION = gql`
 `;
 
 export const ADD_CHILD = gql`
-  mutation addChild($id: ID!) {
-    addChild(childId: $id) {
+  mutation ($childId: ID!) {
+    addChild(childId: $childId) {
       _id
       username
     }
