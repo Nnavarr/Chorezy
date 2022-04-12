@@ -112,6 +112,8 @@ const Profile = () => {
             Add Child
           </button>
 
+        {/* onclick render childForm */}
+
           <ChildList
             username={user.username}
             children={user.children}

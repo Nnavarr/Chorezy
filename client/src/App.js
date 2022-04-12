@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import {
   ApolloClient,
@@ -21,6 +22,7 @@ import SingleTask from './pages/SingleTask';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import AdminProfile from './components/AdminProfile';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
