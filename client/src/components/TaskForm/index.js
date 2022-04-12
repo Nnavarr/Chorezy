@@ -53,18 +53,17 @@ const TaskForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const test = extractInput()
-    console.log(test)
 
     try {
+      let taskValue = document.getElementById('taskValue').value;
+      let taskCategory = document.getElementById('taskCategory').value;
 
-      const {taskName, taskValue, taskCategory } = extractInput()
+      taskValue = parseInt(taskValue);
 
-      console.log(taskName);
       // add task to database
-      // await addTask({
-      //   variables: { name: taskName, category: taskCategory, value: taskValue },
-      // });
+      await addTask({
+        variables: { name: taskText, category: taskCategory, value: taskValue },
+      });
 
       // clear form value
       setText("");
