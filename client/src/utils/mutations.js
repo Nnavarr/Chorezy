@@ -65,7 +65,6 @@ export const REMOVE_AWARD = gql`
   }
 `;
 
-
 export const ADD_REACTION = gql`
   mutation addReaction($thoughtId: ID!, $reactionBody: String!) {
     addReaction(thoughtId: $thoughtId, reactionBody: $reactionBody) {
