@@ -9,6 +9,12 @@ const db = require('./config/connection');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+mongoose.connect(process.env.MONGODB_URI || 'https://chorezy1.herokuapp.com', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+
 const startServer = async () => {
   const server = new ApolloServer({
     typeDefs,
