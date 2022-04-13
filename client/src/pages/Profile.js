@@ -22,7 +22,7 @@ const Profile = () => {
 
   const [addChild] = useMutation(ADD_CHILD);
   const [addUser] = useMutation(ADD_USER);
-  const [addAward] = useMutation(ADD_AWARD);
+  // const [addAward] = useMutation(ADD_AWARD);
   // const [userQuery] = useQuery(QUERY_USER);
 
   // redirect to personal profile page if username is yours
@@ -47,11 +47,13 @@ const Profile = () => {
 
   // check whether the user is an admin or not
   if  (!user.admin){
+
     return (
       <div className="flex-row justify-space-between mb-3">
+      
       <div className="col-12 mb-3 col-lg-8">
         <TaskList
-          tasks={user.tasks}
+          tasks={user.assignments}
           title={`${user.username}'s tasks...`}
         />
       </div></div>
@@ -69,30 +71,25 @@ const Profile = () => {
   //   }
   // };
 
-  
-
   const addNewChild = async () => {
     try {
       // estbalish variables
-      let childUsername = 'new_child3';
-      let childEmail = 'childemail3@email.com';
-      let childPassowrd = 'child123';
+      let childUsername = 'new_child24';
+      let childEmail = 'childemail24@email.com';
+      let childPassword = 'child123';
       let childAdmin = false;
 
       // create new child user
       const { data } = await addUser({
-        variables: { username: childUsername, email: childEmail, password: childPassowrd, admin: childAdmin}
+        variables: { username: childUsername, email: childEmail, password: childPassword, admin: childAdmin}
       })
 
-      // query child
-      const childUser = await data.userQuery({
-        variables: {username: childUsername}
-      })
+      let childId = data.addUser.user._id
     
-      console.log(childUser);
-
       // assign to parent user (that created the child)
-      await addChild({childId: childUser._id})
+      await addChild({
+        variables: {childId: childId}
+      })
 
     } catch (e) {
       console.log(e)
@@ -116,22 +113,21 @@ const Profile = () => {
             Add Child
           </button>
 
+        {/* onclick render childForm */}
+
           <ChildList
             username={user.username}
             children={user.children}
           />
-
         </div>
 
-        <div className="col-12 col-lg-3 mb-3">
-          <AwardList
-            username={user.username}
-            taskCount={user.taskCount}
-            tasks={user.tasks}
-          />
-        </div>
       </div>
-      <div className="mb-3">{!userParam && <TaskForm />}</div>
+      <div className="mb-3">{!userParam && 
+        <TaskForm 
+          children={user.children}
+          tasks={user.tasks}
+        />}
+      </div>
     </div>
   );
 };

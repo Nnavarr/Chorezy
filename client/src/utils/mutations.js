@@ -24,19 +24,24 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_TASK = gql`
-  mutation addTask($taskText: String!) {
-    addTask(taskText: $taskText) {
-      _id
-      taskText
-      createdAt
-      username
-      reactionCount
-      reactions {
-        _id
-      }
-    }
+mutation ($name: String!, $category: String!, $value: Int!) {
+  addTask(name: $name, category: $category, value: $value) {
+    _id,
+    name
   }
+}
 `;
+
+export const ASSIGN_TASK = gql`
+mutation ($username: String!, $taskId: ID!, $taskName: String!, $taskValue: Int!) {
+  assignTask(username: $username, taskId: $taskId, taskName: $taskName, taskValue: $taskValue) {
+    username,
+    taskId
+    taskValue,
+    completed
+  }
+}
+`
 
 export const ADD_AWARD = gql`
   mutation addAward($id: ID!) {
@@ -81,8 +86,8 @@ export const ADD_REACTION = gql`
 `;
 
 export const ADD_CHILD = gql`
-  mutation addChild($id: ID!) {
-    addChild(childId: $id) {
+  mutation ($childId: ID!) {
+    addChild(childId: $childId) {
       _id
       username
     }

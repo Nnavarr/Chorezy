@@ -84,6 +84,7 @@ const resolvers = {
 
       addChild: async (parent, { childId }, context) => {
         if (context.user) {
+
           const updatedUser = await User.findOneAndUpdate(
             { _id: context.user._id },
             { $addToSet: { children: childId } },
@@ -140,14 +141,14 @@ const resolvers = {
 
       // assign task
       // the task information will need to be extracted prior to running the mutation
-      assignTask: async (parent, { username, taskId, taskValue }) => {
+      assignTask: async (parent, { username, taskId, taskName, taskValue }) => {
       
         // set completed to false and extract tasks value
         let completed = false;
 
         // add entry to master assignment model
         const assignment = await Assignment.create( 
-          { username, taskId, taskValue, completed }
+          { username, taskId, taskName, taskValue, completed }
           )
 
         // update user's model

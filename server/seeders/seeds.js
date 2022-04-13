@@ -2,7 +2,7 @@ const faker = require('faker');
 
 // import connection and models
 const db = require('../config/connection');
-const { User, Task, Assignment} = require('../models/index');
+const { User, Task, Assignment } = require('../models/index');
 
 db.once('open', async() => {
   await Task.deleteMany({});
