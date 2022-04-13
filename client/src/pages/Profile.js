@@ -22,7 +22,7 @@ const Profile = () => {
 
   const [addChild] = useMutation(ADD_CHILD);
   const [addUser] = useMutation(ADD_USER);
-  const [addAward] = useMutation(ADD_AWARD);
+  // const [addAward] = useMutation(ADD_AWARD);
   // const [userQuery] = useQuery(QUERY_USER);
 
   // redirect to personal profile page if username is yours
@@ -71,18 +71,17 @@ const Profile = () => {
   //   }
   // };
 
-
   const addNewChild = async () => {
     try {
       // estbalish variables
       let childUsername = 'new_child24';
       let childEmail = 'childemail24@email.com';
-      let childPassowrd = 'child123';
+      let childPassword = 'child123';
       let childAdmin = false;
 
       // create new child user
       const { data } = await addUser({
-        variables: { username: childUsername, email: childEmail, password: childPassowrd, admin: childAdmin}
+        variables: { username: childUsername, email: childEmail, password: childPassword, admin: childAdmin}
       })
 
       let childId = data.addUser.user._id
@@ -122,18 +121,13 @@ const Profile = () => {
           />
         </div>
 
-        <h3>Assign Task</h3>
-        
-{/* 
-        <div className="col-12 col-lg-3 mb-3">
-          <AwardList
-            username={user.username}
-            taskCount={user.taskCount}
-            tasks={user.tasks}
-          />
-        </div> */}
       </div>
-      <div className="mb-3">{!userParam && <TaskForm />}</div>
+      <div className="mb-3">{!userParam && 
+        <TaskForm 
+          children={user.children}
+          tasks={user.tasks}
+        />}
+      </div>
     </div>
   );
 };

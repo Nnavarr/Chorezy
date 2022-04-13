@@ -4,7 +4,7 @@ import { ADD_TASK } from "../../utils/mutations";
 import Form from 'react-bootstrap/Form';
 import { QUERY_TASKS, QUERY_USER } from '../../utils/queries';
 
-const TaskForm = () => {
+const TaskForm = (data) => {
   const [taskText, setText] = useState("");
   const [characterCount, setCharacterCount] = useState(0);
   const [addTask, { error }] = useMutation(ADD_TASK)
@@ -107,6 +107,35 @@ const TaskForm = () => {
         <button className="btn col-12 col-md-3" type="submit" onClick={handleFormSubmit}>
           Create
         </button>       
+
+        {/* Assign Task */}
+        <h2>Assign Task</h2>
+        {/* render the children */}
+
+        {/* {children.children.map(child => (
+          <button className="btn w-100 display-block mb-2" key={child.username}>
+          </button>
+        ))} */}
+
+        <Form>
+          {/* iterate through children */}
+          <Form.Select aria-label="Default select example" id='taskCategory'>
+            {data.children.map(child => (
+              <option value={child.username}>{child.username}</option>
+            ))}
+          </Form.Select>
+        
+          {/* iterate through tasks*/} 
+          <Form.Select aria-label="Default select example" id='childAssign'>
+            {data.tasks.map(task => (
+              <option value={task.name}>{task.name}</option>
+            ))}
+          </Form.Select>
+        </Form>
+    
+        <button className="btn col-12 col-md-3" type="submit" onClick={handleFormSubmit}>
+          Create
+        </button>      
 
     </div>
   );
