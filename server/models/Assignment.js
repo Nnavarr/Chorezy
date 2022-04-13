@@ -16,6 +16,10 @@
         type: Number
       },
 
+      taskName: {
+        type: String
+      },
+
       completed: {
         type: Boolean
       }
