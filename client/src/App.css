@@ -1,5 +1,5 @@
 :root {
-  --primary: #232dec;
+  --primary: #5693c8;
   --secondary: #3eb9db;
   --tertiary: #93e0db;
   --quatrinary: #cadbda;
@@ -16,6 +16,7 @@
 
 * {
   box-sizing: border-box;
+  border-radius: 15px;
   
 }
 
@@ -56,10 +57,19 @@ h6 {
 
 h1 {
   font-size: 2.25rem;
+
+}
+h1:hover{
+  color: var(--secondary);
 }
 
 h2 {
   font-size: 2rem;
+  color: var(--primary);
+}
+
+h2:hover{
+  color: var(--primary);
 }
 
 h3 {
@@ -120,7 +130,7 @@ nav a:hover {
 
 .btn,
 .pill {
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   text-decoration: none;
   padding: 0.5rem 1.2rem;
   margin: 5px 0;
