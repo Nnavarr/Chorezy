@@ -26,8 +26,6 @@ const Profile = () => {
   // const [userQuery] = useQuery(QUERY_USER);
 
   // redirect to personal profile page if username is yours
-  
-
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Redirect to="/profile" />;
   }
@@ -45,18 +43,20 @@ const Profile = () => {
     );
   }
 
+  // query tasks
+
   // check whether the user is an admin or not
   if  (!user.admin){
-
     return (
       <div className="flex-row justify-space-between mb-3">
-      
-      <div className="col-12 mb-3 col-lg-8">
-        <TaskList
-          tasks={user.assignments}
-          title={`${user.username}'s tasks...`}
-        />
-      </div></div>
+        <div className="col-12 mb-3 col-lg-8">
+          <TaskList
+            tasks={user.assignments}
+            title={`${user.username}'s tasks...`}
+          />
+        </div>
+      </div>
+
     )
   }
 
@@ -114,7 +114,6 @@ const Profile = () => {
           </button>
 
         {/* onclick render childForm */}
-
           <ChildList
             username={user.username}
             children={user.children}

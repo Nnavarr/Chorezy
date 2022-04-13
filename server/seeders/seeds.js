@@ -112,6 +112,19 @@ db.once('open', async() => {
     await User.updateOne({ _id: noeUser._id }, { $addToSet: { children: childId }})
   }
 
+  // add specific child
+  const newChildUser = 'nnavarr_child';
+  const childEmail = 'child@email.com';
+  const childPassword = 'Chorezy123'
+  const childAdmin = false
+
+  // create user
+  await User.create( {username: newChildUser, email: childEmail, password: childPassword, admin: childAdmin} )
+
+  // query child id
+  let childUser = await User.findOne({ username: 'nnavarr_child'}).select('_id')
+  await User.updateOne({ _id: noeUser._id }, { $addToSet: { children: childUser._id }})
+  
   process.exit(0);
 })
 

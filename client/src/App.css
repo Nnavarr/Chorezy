@@ -191,6 +191,10 @@ img{
   margin-bottom: 4%;
 }
 
+#taskCardDescription{
+  color:#f2f8b0
+}
+
 .home-img {
   width: 100%;
 }
