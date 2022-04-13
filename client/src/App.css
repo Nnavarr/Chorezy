@@ -1,10 +1,11 @@
 :root {
   --primary: #232dec;
-  --secondary: #3eb9db;
+  --secondary: #7ed9f3;
   --tertiary: #93e0db;
   --quatrinary: #cadbda;
   --light: #e1f5f4;
   --dark: #f2f8b0;
+  --steel:#4eccca;
   --error: rgb(228, 46, 1);
   --border-radius: 0.3rem;
   --spacing-one: calc(1rem * 0.25);
@@ -37,11 +38,14 @@ body {
   background-color: orange;
 }
 
-
+header {
+  background-color: var(--secondary);
+}
 
 footer{
-  color: var(--dark);
+  background-color: var(--secondary);
 }
+
 h1,
 h2,
 h3,
@@ -60,6 +64,8 @@ h1 {
 
 h2 {
   font-size: 2rem;
+  color: var(--steel);
+  text-align: center;
 }
 
 h3 {
