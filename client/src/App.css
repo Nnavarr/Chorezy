@@ -2,8 +2,8 @@
   --primary: #5693c8;
   --secondary: #3eb9db;
   --tertiary: #93e0db;
-  --quatrinary: #cadbda;
-  --light: #e1f5f4;
+  --quatrinary: #80bdcb;
+  --light: #76bcd8;
   --dark: #f2f8b0;
   --error: rgb(228, 46, 1);
   --border-radius: 0.3rem;
@@ -16,7 +16,7 @@
 
 * {
   box-sizing: border-box;
-  border-radius: 15px;
+
   
 }
 
@@ -35,13 +35,16 @@ body {
   line-height: 1.5;
   font-size: 20px;
   color: var(--dark);
-  background-color: orange;
+  background-color: var(--light);
 }
 
-
+header{
+  background-color: var(--light);
+}
 
 footer{
   color: var(--dark);
+  background-color: var(--light);
 }
 h1,
 h2,
@@ -60,16 +63,16 @@ h1 {
 
 }
 h1:hover{
-  color: var(--secondary);
+  color: var(--primary);
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.7rem;
   color: var(--primary);
 }
 
 h2:hover{
-  color: var(--primary);
+  color: var(--quatrinary);
 }
 
 h3 {
