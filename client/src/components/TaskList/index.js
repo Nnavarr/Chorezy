@@ -25,10 +25,6 @@ const TaskList = ({ tasks, title }) => {
             <div className="card-body">
               <Link to={`/task/${task._id}`}>
                 <p>{task.taskText}</p>
-                <p className="mb-0">
-                  Reactions: {task.reactionCount} || Click to{" "}
-                  {task.reactionCount ? "see" : "start"} the discussion!
-                </p>
               </Link>
             </div>
           </div>
