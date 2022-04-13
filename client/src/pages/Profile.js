@@ -47,11 +47,13 @@ const Profile = () => {
 
   // check whether the user is an admin or not
   if  (!user.admin){
+
     return (
       <div className="flex-row justify-space-between mb-3">
+      
       <div className="col-12 mb-3 col-lg-8">
         <TaskList
-          tasks={user.tasks}
+          tasks={user.assignments}
           title={`${user.username}'s tasks...`}
         />
       </div></div>
@@ -118,16 +120,18 @@ const Profile = () => {
             username={user.username}
             children={user.children}
           />
-
         </div>
 
+        <h3>Assign Task</h3>
+        
+{/* 
         <div className="col-12 col-lg-3 mb-3">
           <AwardList
             username={user.username}
             taskCount={user.taskCount}
             tasks={user.tasks}
           />
-        </div>
+        </div> */}
       </div>
       <div className="mb-3">{!userParam && <TaskForm />}</div>
     </div>

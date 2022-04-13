@@ -23,6 +23,7 @@ const typeDefs = gql`
     _id: ID!
     username: String
     taskId: String
+    taskName: String
     taskValue: Int
     completed: Boolean
   }
@@ -52,7 +53,7 @@ const typeDefs = gql`
     addTask(name: String!, category: String!, value: Int!): Task
     removeTask(taskId: ID!): Task
 
-    assignTask(username: String!, taskId: ID!, taskValue: Int!): Assignment
+    assignTask(username: String!, taskId: ID!, taskName:String, taskValue: Int!): Assignment
     removeAssignedTask(assignmentId: ID!): Assignment
   }
 `

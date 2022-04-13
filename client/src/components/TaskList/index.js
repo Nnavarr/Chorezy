@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const TaskList = ({ tasks, title }) => {
+
+  console.log(tasks)
   if (!tasks.length) {
     return <h3>🎉 No Chores Left! 🎉</h3>;
   }
@@ -20,7 +22,7 @@ const TaskList = ({ tasks, title }) => {
               >
                 {task.username}
               </Link>{" "}
-              task on {task.createdAt}
+              {task.taskName}
             </p>
             <div className="card-body">
               <Link to={`/task/${task._id}`}>
