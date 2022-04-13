@@ -192,7 +192,15 @@ img{
   margin-bottom: 4%;
 }
 
-#taskCardDescription{
+#welcomeBanner {
+  color: var(--primary);
+}
+
+#welcomeBanner:hover {
+  color: var(--light);
+}
+
+#taskCardDescription {
   color:#f2f8b0
 }
 
