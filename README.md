@@ -13,6 +13,7 @@
 Deployment for the Chorezy app was done on Heroku. The link can be found [here](https://chorezy2.herokuapp.com/)
 
 ## App ScreenShot
+![image](https://user-images.githubusercontent.com/92074903/163104724-6d562d09-23fd-4668-a12e-d0fe9df2b7f9.png)
 
 ## Technologies
 `MongoDB`
@@ -70,6 +71,7 @@ Once the user and task are selected, clicking the `Assign` button will associate
 
 #### Viewing Tasks by User
 With the tasks assigned, the user can keep an overview of individual child user's tasks by clicking their username within their profile page. This take the user to that child's account summary and show any outstanding tasks
+
 
 
 
