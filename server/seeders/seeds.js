@@ -93,6 +93,25 @@ db.once('open', async() => {
   // insert to mongodb
   await Assignment.collection.insertMany(assignmentData);
 
+  // add specific family relationship
+  const newusername = 'nnavarr';
+  const email = 'noe.navarro@email.com';
+  const password = 'Chorezy123'
+  const admin = true
+
+  // create user
+  await User.create( {username: newusername, email: email, password: password, admin: admin} )
+  
+  // query for user
+  let noeUser = await User.findOne({ username: 'nnavarr'}).select('_id')
+
+  // assign child
+  for (let i = 0; i < 3; i += 1) {
+    const randomUserIndex = Math.floor(Math.random() * childUsers.length);
+    const {_id: childId } = childUsers[randomUserIndex]
+    await User.updateOne({ _id: noeUser._id }, { $addToSet: { children: childId }})
+  }
+
   process.exit(0);
 })
 
