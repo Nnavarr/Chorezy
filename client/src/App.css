@@ -69,6 +69,7 @@ h1:hover{
 h2 {
   font-size: 1.7rem;
   color: var(--primary);
+  background-color: var(--dark);
 }
 
 h2:hover{
