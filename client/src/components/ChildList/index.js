@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ChildList = ({ childCount, username, children }) => {
   if (!children || !children.length) {
-    return <p className="bg-dark text-light p-3">{username}, add your children!</p>;
+    return <p className="bg-dark text-secondary p-3">{username}, add your children!</p>;
   }
 
   return (

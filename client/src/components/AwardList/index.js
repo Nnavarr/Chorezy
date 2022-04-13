@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const AwardList = ({ awardCount, username, awards }) => {
   if (!awards || !awards.length) {
-    return <p className="bg-dark text-light p-3">{username}, make some awards!</p>;
+    return <p className="bg-dark text-secondary p-3">{username}, make some awards!</p>;
   }
 
   return (
