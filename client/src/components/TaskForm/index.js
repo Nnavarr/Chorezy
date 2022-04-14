@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import { ADD_TASK } from "../../utils/mutations";
+import { ADD_TASK, ASSIGN_TASK } from "../../utils/mutations";
 import Form from 'react-bootstrap/Form';
 import { QUERY_TASKS, QUERY_USER } from '../../utils/queries';
 
-const TaskForm = () => {
+const TaskForm = (data) => {
   const [taskText, setText] = useState("");
   const [characterCount, setCharacterCount] = useState(0);
-  const [addTask, { error }] = useMutation(ADD_TASK)
+  const [addTask, {error}] = useMutation(ADD_TASK);
+  const [assignTask] = useMutation(ASSIGN_TASK)
 
   // const [addTask, { error }] = useMutation(ADD_TASK, {
   //   update(cache, { data: { addTask } }) {
@@ -63,6 +64,45 @@ const TaskForm = () => {
     }
   };
 
+
+  // form submit function for assignment
+  const assignSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      // extract values from inputs
+      const childEl = document.getElementById('childSelect')
+      const taskEl = document.getElementById('taskSelect')
+
+      let childValue = childEl.value;
+      let taskValue = taskEl.value;
+      
+      // filter task 
+      let taskArray = data.tasks.filter(function(value) {
+        return value.name === taskValue; })
+
+      // process taskArray
+      taskArray = taskArray[0];
+
+      // id
+      let taskId = taskArray._id;
+      let taskName = taskArray.name;
+      let taskPoints = taskArray.value;
+
+      // assign task
+      await assignTask({
+        variables: {username: childValue, taskId: taskId, taskName: taskName, taskValue: taskPoints},
+      });
+
+      // clear form value
+      setText("");
+      setCharacterCount(0);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+
   return (
     <div>
       <h2>Chore List</h2>
@@ -77,7 +117,7 @@ const TaskForm = () => {
         <textarea
           placeholder="Add New Chore..."
           value={taskText}
-          className="form-input col-12 col-md-9"
+          className="form-input col-12 col-md-9 justify-center align-center"
           onChange={handleChange}
           id='taskName'
         ></textarea>
@@ -104,9 +144,32 @@ const TaskForm = () => {
           </Form.Select>
         </Form>
     
-        <button className="btn col-12 col-md-3" type="submit" onClick={handleFormSubmit}>
+        <button className="btn col-12 col-md-3 justify-center align-center" type="submit" onClick={handleFormSubmit}>
           Create
         </button>       
+
+        {/* Assign Task */}
+        <h2>Assign Task</h2>
+
+        <Form>
+          {/* iterate through children */}
+          <Form.Select aria-label="Default select example" id='childSelect'>
+            {data.children.map(child => (
+              <option value={child.username}>{child.username}</option>
+            ))}
+          </Form.Select>
+        
+          {/* iterate through tasks*/} 
+          <Form.Select aria-label="Default select example" id='taskSelect'>
+            {data.tasks.map(task => (
+              <option value={task.name}>{task.name}</option>
+            ))}
+          </Form.Select>
+        </Form>
+    
+        <button className="btn col-12 col-md-3 justify-center align-center" type="submit" onClick={assignSubmit}>
+          Assign
+        </button>      
 
     </div>
   );

@@ -33,8 +33,8 @@ mutation ($name: String!, $category: String!, $value: Int!) {
 `;
 
 export const ASSIGN_TASK = gql`
-mutation ($username: String!, $taskId: ID!, $taskValue: Int!) {
-  assignTask(username: $username, taskId: $taskId, taskValue: $taskValue) {
+mutation ($username: String!, $taskId: ID!, $taskName: String!, $taskValue: Int!) {
+  assignTask(username: $username, taskId: $taskId, taskName: $taskName, taskValue: $taskValue) {
     username,
     taskId
     taskValue,

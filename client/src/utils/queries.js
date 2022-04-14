@@ -20,6 +20,7 @@ export const QUERY_USER = gql`
       assignments {
         _id
         taskId
+        taskName
         taskValue
         completed
       }
@@ -53,6 +54,7 @@ export const QUERY_ME = gql`
       assignments {
         _id
         taskId
+        taskName
         taskValue
         completed
       }
