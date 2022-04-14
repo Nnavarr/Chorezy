@@ -5,12 +5,12 @@ const TaskList = ({ tasks, title }) => {
 
   console.log(tasks)
   if (!tasks.length) {
-    return <h3>🎉 No Chores Left! 🎉</h3>;
+    return <h2>🎉 No Chores Left! 🎉</h2>;
   }
 
   return (
     <div>
-      <h3>{title}</h3>
+      <h2>{title}</h2>
       {tasks &&
         tasks.map((task) => (
           <div key={task._id} className="card mb-3">
@@ -25,9 +25,7 @@ const TaskList = ({ tasks, title }) => {
               {task.taskName}
             </p>
             <div className="card-body">
-              <Link to={`/task/${task._id}`}>
-                <p>{task.taskText}</p>
-              </Link>
+              <p id='taskCardDescription'>The task is worth {task.taskValue} points! 😄</p>
             </div>
           </div>
         ))}

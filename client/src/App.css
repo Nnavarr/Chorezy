@@ -1,9 +1,9 @@
 :root {
-  --primary: #232dec;
+  --primary: #5693c8;
   --secondary: #3eb9db;
   --tertiary: #93e0db;
-  --quatrinary: #cadbda;
-  --light: #e1f5f4;
+  --quatrinary: #80bdcb;
+  --light: #76bcd8;
   --dark: #f2f8b0;
   --error: rgb(228, 46, 1);
   --border-radius: 0.3rem;
@@ -16,6 +16,7 @@
 
 * {
   box-sizing: border-box;
+
   
 }
 
@@ -34,13 +35,16 @@ body {
   line-height: 1.5;
   font-size: 20px;
   color: var(--dark);
-  background-color: orange;
+  background-color: var(--light);
 }
 
-
+header{
+  background-color: var(--light);
+}
 
 footer{
   color: var(--dark);
+  background-color: var(--light);
 }
 h1,
 h2,
@@ -56,10 +60,20 @@ h6 {
 
 h1 {
   font-size: 2.25rem;
+
+}
+h1:hover{
+  color: var(--primary);
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.7rem;
+  color: var(--primary);
+  background-color: var(--dark);
+}
+
+h2:hover{
+  color: var(--quatrinary);
 }
 
 h3 {
@@ -120,7 +134,7 @@ nav a:hover {
 
 .btn,
 .pill {
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   text-decoration: none;
   padding: 0.5rem 1.2rem;
   margin: 5px 0;
@@ -176,6 +190,18 @@ nav a:hover {
 img{
   border-radius:15px;
   margin-bottom: 4%;
+}
+
+#welcomeBanner {
+  color: var(--primary);
+}
+
+#welcomeBanner:hover {
+  color: var(--light);
+}
+
+#taskCardDescription {
+  color:#f2f8b0
 }
 
 .home-img {

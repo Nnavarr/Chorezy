@@ -8,9 +8,9 @@ const ChildList = ({ childCount, username, children }) => {
 
   return (
     <div>
-      <h5>
+      <h2>
         {username}'s {childCount} {childCount === 1 ? 'child' : 'children'}
-      </h5>
+      </h2>
       {children.map(child => (
         <button className="btn w-100 display-block mb-2" key={child._id}>
           <Link to={`/profile/${child.username}`}>{child.username}</Link>
