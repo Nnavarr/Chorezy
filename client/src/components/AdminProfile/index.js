@@ -27,7 +27,6 @@ const AdminProfile = () => {
     <div className={classes.imageContainer} style={imageBackground}> 
       <section className="w-100 mt-auto bg-secondary p-4">
         <div className="container"></div>
-        {/* <={coverImage} className="background" style={{ width: "100%" }} alt="cover" /> */}
       </section>
     </div>
   );
