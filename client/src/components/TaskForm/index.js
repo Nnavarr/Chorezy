@@ -117,7 +117,7 @@ const TaskForm = (data) => {
         <textarea
           placeholder="Add New Chore..."
           value={taskText}
-          className="form-input col-12 col-md-9"
+          className="form-input col-12 col-md-9 justify-center align-center"
           onChange={handleChange}
           id='taskName'
         ></textarea>
@@ -144,7 +144,7 @@ const TaskForm = (data) => {
           </Form.Select>
         </Form>
     
-        <button className="btn col-12 col-md-3" type="submit" onClick={handleFormSubmit}>
+        <button className="btn col-12 col-md-3 justify-center align-center" type="submit" onClick={handleFormSubmit}>
           Create
         </button>       
 
@@ -167,7 +167,7 @@ const TaskForm = (data) => {
           </Form.Select>
         </Form>
     
-        <button className="btn col-12 col-md-3" type="submit" onClick={assignSubmit}>
+        <button className="btn col-12 col-md-3 justify-center align-center" type="submit" onClick={assignSubmit}>
           Assign
         </button>      
 
