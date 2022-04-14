@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const TaskList = ({ tasks, title }) => {
   if (!tasks.length) {
-    return <h3>🎉 No Chores Left! 🎉</h3>;
+    return <h3 style={{ fontsize: '20px', fontcolor: '#3eb9db', backgroundColor: 'white', border: '3px solid #f2f8b0'}}>🎉 No Chores Left! 🎉</h3>;
   }
 
   return (
