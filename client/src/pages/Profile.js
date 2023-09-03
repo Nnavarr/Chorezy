@@ -50,7 +50,6 @@ const Profile = () => {
 
     return (
       <div className="flex-row justify-space-between mb-3">
-<<<<<<< HEAD
       
       <div className="col-12 mb-3 col-lg-8">
         <TaskList
@@ -58,16 +57,6 @@ const Profile = () => {
           title={`${user.username}'s tasks...`}
         />
       </div></div>
-=======
-        <div className="col-12 mb-3 col-lg-8">
-          <TaskList
-            tasks={user.assignments}
-            title={`${user.username}'s tasks...`}
-          />
-        </div>
-      </div>
-
->>>>>>> main
     )
   }
 
