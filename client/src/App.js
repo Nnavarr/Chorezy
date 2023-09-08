@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, 
+  Route } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
@@ -84,16 +84,16 @@ function App() {
           <div className={classes.imageContainer} style={imageBackground}>
             <div className={classes.overlay}></div>
             <div className={classes.mainContainer}>
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={Signup} />
-                <Route exact path="/profile/:username?" component={Profile} />
-                <Route exact path="/SingleTask/:id" component={SingleTask} />
-                <Route exact path="/Admin" component={AdminProfile} />
+              <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/login" element={<Login />} />
+                <Route exact path="/signup" element={<Signup />} />
+                <Route exact path="/profile/:username?" element={<Profile />} />
+                <Route exact path="/SingleTask/:id" element={<SingleTask />} />
+                <Route exact path="/Admin" element={<AdminProfile />} />
 
-                <Route component={NoMatch} />
-              </Switch>
+                <Route element={<NoMatch />} />
+              </Routes>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import TaskForm from '../components/TaskForm';
 import TaskList from '../components/TaskList';
@@ -14,6 +14,9 @@ import Auth from '../utils/auth';
 const Profile = () => {
   const { username: userParam } = useParams();
 
+  // navigation
+  const navigate = useNavigate();
+
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam }, 
   });
@@ -27,7 +30,7 @@ const Profile = () => {
 
   // redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Redirect to="/profile" />;
+    navigate('/profile');
   }
 
   if (loading) {
