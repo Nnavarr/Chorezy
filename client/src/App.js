@@ -78,20 +78,18 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-
         <div className="flex-column justify-flex-start min-100-vh" >
           <Header />
           <div className={classes.imageContainer} style={imageBackground}>
             <div className={classes.overlay}></div>
             <div className={classes.mainContainer}>
               <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/signup" element={<Signup />} />
-                <Route exact path="/profile/:username?" element={<Profile />} />
-                <Route exact path="/SingleTask/:id" element={<SingleTask />} />
-                <Route exact path="/Admin" element={<AdminProfile />} />
-
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/profile/:username?" element={<Profile />} />
+                {/* <Route path="/SingleTask/:id" element={<SingleTask />} /> */}
+                <Route path="/Admin" element={<AdminProfile />} />
                 <Route element={<NoMatch />} />
               </Routes>
             </div>
