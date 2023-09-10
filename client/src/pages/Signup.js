@@ -9,7 +9,7 @@ const Signup = () => {
     username: '',
     email: '',
     password: '',
-    admin: false
+    admin: true
   });
 
   const [addUser, { error }] = useMutation(ADD_USER);
@@ -45,7 +45,6 @@ const Signup = () => {
       password: '',
       admin: false
     })
-
   };
 
   return (
