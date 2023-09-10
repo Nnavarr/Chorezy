@@ -9,7 +9,7 @@ const Signup = () => {
     username: '',
     email: '',
     password: '',
-    admin: true
+    admin: false
   });
 
   const [addUser, { error }] = useMutation(ADD_USER);
@@ -35,11 +35,16 @@ const Signup = () => {
 
       Auth.login(data.addUser.token);
     } catch (e) {
-
       console.error(e);
     }
 
     // reset form state
+    setFormState({
+      username: '',
+      email: '',
+      password: '',
+      admin: false
+    })
 
   };
 
