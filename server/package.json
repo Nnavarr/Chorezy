@@ -12,16 +12,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "^3.3.0",
+    "apollo-server-express": "^3.12.1",
     "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^4.1.0",
-    "graphql": "^15.5.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.13",
+    "graphql": "^16.8.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.5.0",
     "react-webpack": "^0.4.1"
   },
   "devDependencies": {
+    "concurrently": "^8.2.1",
     "nodemon": "^2.0.3"
   }
 }

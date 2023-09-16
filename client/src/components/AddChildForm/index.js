@@ -12,11 +12,11 @@ const AddChildForm = () => {
     admin: false
   });
 
-  const [addUser, { error }] = useMutation(ADD_USER);
   const addChild = useMutation(ADD_CHILD);
 
   // update state based on form input changes
   const handleChange = (event) => {
+    console.log('this is being updated')
     const { name, value } = event.target;
 
     setFormState({
@@ -89,7 +89,6 @@ const AddChildForm = () => {
               <button className="btn d-block w-100" type="submit">
                 Submit
               </button>
-           
 
             {error && <div>Signup failed</div>} 
             </form>

@@ -3,8 +3,9 @@ const {ApolloServer} = require('apollo-server-express');
 const path = require('path');
 
 const { typeDefs, resolvers } = require('./schemas');
-const {authMiddleware} = require('./utils/auth');
+const { authMiddleware } = require('./utils/auth');
 const db = require('./config/connection');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -21,6 +22,12 @@ const startServer = async () => {
 };
 
 startServer()
+
+// configure cors
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}))
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, 
+  Route } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
@@ -23,9 +23,8 @@ import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import AdminProfile from './components/AdminProfile';
 
-
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -78,22 +77,20 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-
         <div className="flex-column justify-flex-start min-100-vh" >
           <Header />
           <div className={classes.imageContainer} style={imageBackground}>
             <div className={classes.overlay}></div>
             <div className={classes.mainContainer}>
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={Signup} />
-                <Route exact path="/profile/:username?" component={Profile} />
-                <Route exact path="/SingleTask/:id" component={SingleTask} />
-                <Route exact path="/Admin" component={AdminProfile} />
-
-                <Route component={NoMatch} />
-              </Switch>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/profile/:username?" element={<Profile />} />
+                {/* <Route path="/SingleTask/:id" element={<SingleTask />} /> */}
+                <Route path="/Admin" element={<AdminProfile />} />
+                <Route element={<NoMatch />} />
+              </Routes>
             </div>
           </div>
         </div>

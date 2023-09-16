@@ -35,12 +35,16 @@ const Signup = () => {
 
       Auth.login(data.addUser.token);
     } catch (e) {
-
       console.error(e);
     }
 
     // reset form state
-
+    setFormState({
+      username: '',
+      email: '',
+      password: '',
+      admin: false
+    })
   };
 
   return (
@@ -83,9 +87,8 @@ const Signup = () => {
               <button className="btn d-block w-100" type="submit">
                 Submit
               </button>
-           
 
-            {error && <div>Signup failed</div>} 
+            {error && <div className='text-error'>Signup failed</div>} 
             </form>
           </div>
 
