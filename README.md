@@ -76,3 +76,6 @@ With the tasks assigned, the user can keep an overview of individual child user'
 
 
 Happy browsing! 
+
+### Update 9/16/2023 
+The heroku stack was updated to heroku 22.
