@@ -17,10 +17,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mukukuu/deep-thoughts/issues"
-  },
-  "homepage": "https://github.com/mukukuu/deep-thoughts#readme",
+  "homepage": "https://chorezy2.herokuapp.com/",
   "devDependencies": {
     "concurrently": "^8.2.1"
   }
